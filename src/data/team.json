@@ -1,0 +1,119 @@
+{
+    "leadership": [
+        {
+            "name": "Prof. Swapnali Teli",
+            "role": "Brainwaves Coordinator",
+            "type": "faculty"
+        },
+        {
+            "name": "Prof. Sprooha Athalye",
+            "role": "Brainwaves Co-Coordinator",
+            "type": "faculty"
+        }
+    ],
+    "technicalSecretaries": [
+        {
+            "name": "Mr. Swanand Shenai",
+            "role": "Technical Secretary",
+            "category": "Boys"
+        },
+        {
+            "name": "Ms. Anushka Talawdekar",
+            "role": "Technical Secretary",
+            "category": "Girls"
+        }
+    ],
+    "committees": [
+        {
+            "name": "Hackathon",
+            "icon": "💻",
+            "head": "Varad Sonavadekar",
+            "coHead": [
+                "Prathamesh Gawas"
+            ]
+        },
+        {
+            "name": "Web Design",
+            "icon": "🌐",
+            "head": "Tejas Rawool",
+            "coHead": [
+                "Prathamesh Gawade"
+            ]
+        },
+        {
+            "name": "Robo Team",
+            "icon": "🤖",
+            "head": "Sahil Parab",
+            "coHead": [
+                "Niranjan Kolwankar",
+                "Kunal Goriwale"
+            ]
+        },
+        {
+            "name": "BrainByte",
+            "icon": "❓",
+            "head": "Sujal Khedekar",
+            "coHead": [
+                "Ved Samant"
+            ]
+        },
+        {
+            "name": "Kalakruti",
+            "icon": "🎨",
+            "head": "Yash Pednekar",
+            "coHead": [
+                "Samidha Patil",
+                "Sanjana Pawar"
+            ]
+        },
+        {
+            "name": "Design & Promotion",
+            "icon": "📢",
+            "head": "Vighnesh Gawande",
+            "coHead": [
+                "Vaidehi Talekar"
+            ]
+        },
+        {
+            "name": "Decoration",
+            "icon": "✨",
+            "head": "Suraj Rawool",
+            "coHead": [
+                "Omkar Morajkar",
+                "Arya Kharde"
+            ]
+        },
+        {
+            "name": "Social Media",
+            "icon": "📱",
+            "head": "Soha Ansari",
+            "coHead": [
+                "Shivam Tanavade"
+            ]
+        },
+        {
+            "name": "Documentation",
+            "icon": "📝",
+            "head": "Rohit Kalvankar",
+            "coHead": [
+                "Zehan Bondre"
+            ]
+        },
+        {
+            "name": "Transport",
+            "icon": "🚌",
+            "head": "Ajinkya Satam",
+            "coHead": [
+                "Atharva Dambe"
+            ]
+        },
+        {
+            "name": "Finance",
+            "icon": "💰",
+            "head": "Parth Salvi",
+            "coHead": [
+                "Ayush Sawant"
+            ]
+        }
+    ]
+}

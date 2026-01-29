@@ -1,0 +1,209 @@
+[
+    {
+        "id": "prompt-engineering",
+        "name": "Prompt Engineering",
+        "parentEvent": "BrainByte",
+        "description": "Master the art of crafting effective prompts for AI systems. Learn techniques to get optimal outputs from language models.",
+        "poster": null,
+        "formLink": "https://forms.google.com/brainbyte-prompt",
+        "rules": [
+            "Individual participation",
+            "Online round followed by finals"
+        ],
+        "eligibility": "Open to all students"
+    },
+    {
+        "id": "model-selection",
+        "name": "Model Selection",
+        "parentEvent": "BrainByte",
+        "description": "Choose the right AI model for the task. Evaluate and select optimal models for various use cases.",
+        "poster": null,
+        "formLink": "https://forms.google.com/brainbyte-model",
+        "rules": [
+            "Individual participation",
+            "Problem-solving based evaluation"
+        ],
+        "eligibility": "Open to all students"
+    },
+    {
+        "id": "ai-debugging",
+        "name": "AI Debugging Without Code",
+        "parentEvent": "BrainByte",
+        "description": "Debug AI outputs without writing code. Use logical reasoning to identify and fix AI behavior issues.",
+        "poster": null,
+        "formLink": "https://forms.google.com/brainbyte-debug",
+        "rules": [
+            "Individual participation",
+            "No coding required"
+        ],
+        "eligibility": "Open to all students"
+    },
+    {
+        "id": "ai-reasoning-test",
+        "name": "Online AI Reasoning Test",
+        "parentEvent": "BrainByte",
+        "description": "Selection round testing your AI reasoning abilities. Top performers advance to the main event.",
+        "poster": null,
+        "formLink": "https://forms.google.com/brainbyte-reasoning",
+        "rules": [
+            "Individual participation",
+            "Online MCQ-based test",
+            "Selection round for main events"
+        ],
+        "eligibility": "Open to all students"
+    },
+    {
+        "id": "best-out-of-waste",
+        "name": "Best Out of Waste",
+        "parentEvent": "Kalakruti",
+        "description": "Transform waste materials into creative art pieces. Showcase your innovation and environmental consciousness.",
+        "poster": null,
+        "formLink": "https://forms.google.com/kalakruti-waste",
+        "rules": [
+            "Individual or team of 2",
+            "Materials provided on spot",
+            "Time limit: 2 hours"
+        ],
+        "eligibility": "Open to all"
+    },
+    {
+        "id": "mehendi",
+        "name": "Mehendi",
+        "parentEvent": "Kalakruti",
+        "description": "Showcase your mehendi artistry skills. Create intricate and beautiful henna designs.",
+        "poster": null,
+        "formLink": "https://forms.google.com/kalakruti-mehendi",
+        "rules": [
+            "Individual participation",
+            "Bring your own mehendi cones",
+            "Time limit: 1.5 hours"
+        ],
+        "eligibility": "Open to all"
+    },
+    {
+        "id": "reel-making",
+        "name": "Reel/Short Making",
+        "parentEvent": "Kalakruti",
+        "description": "Create engaging short-form video content. Show off your storytelling and editing skills.",
+        "poster": null,
+        "formLink": "https://forms.google.com/kalakruti-reel",
+        "rules": [
+            "Individual or team of 3",
+            "Maximum duration: 60 seconds",
+            "Theme announced on event day"
+        ],
+        "eligibility": "Open to all"
+    },
+    {
+        "id": "origami-quilling",
+        "name": "Origami/Quilling/Knitting",
+        "parentEvent": "Kalakruti",
+        "description": "Create beautiful paper art through origami, quilling, or knitting techniques.",
+        "poster": null,
+        "formLink": "https://forms.google.com/kalakruti-origami",
+        "rules": [
+            "Individual participation",
+            "Materials provided",
+            "Time limit: 2 hours"
+        ],
+        "eligibility": "Open to all"
+    },
+    {
+        "id": "cup-mug-painting",
+        "name": "Cup & Mug Painting",
+        "parentEvent": "Kalakruti",
+        "description": "Transform plain cups and mugs into artistic masterpieces with your creative painting skills.",
+        "poster": null,
+        "formLink": "https://forms.google.com/kalakruti-cup",
+        "rules": [
+            "Individual participation",
+            "Cups/Mugs provided",
+            "Bring your own brushes"
+        ],
+        "eligibility": "Open to all"
+    },
+    {
+        "id": "pot-painting",
+        "name": "Pot Painting",
+        "parentEvent": "Kalakruti",
+        "description": "Decorate terracotta pots with vibrant colors and creative designs.",
+        "poster": null,
+        "formLink": "https://forms.google.com/kalakruti-pot",
+        "rules": [
+            "Individual participation",
+            "Pots provided",
+            "Paints and brushes to bring"
+        ],
+        "eligibility": "Open to all"
+    },
+    {
+        "id": "painting-sketching",
+        "name": "Painting & Sketching",
+        "parentEvent": "Kalakruti",
+        "description": "Express your artistic vision through painting or sketching. Theme announced on spot.",
+        "poster": null,
+        "formLink": "https://forms.google.com/kalakruti-paint",
+        "rules": [
+            "Individual participation",
+            "Bring your own materials",
+            "Time limit: 3 hours"
+        ],
+        "eligibility": "Open to all"
+    },
+    {
+        "id": "photography",
+        "name": "Mobile & DSLR Photography",
+        "parentEvent": "Kalakruti",
+        "description": "Capture stunning photographs using your mobile or DSLR camera. Theme-based competition.",
+        "poster": null,
+        "formLink": "https://forms.google.com/kalakruti-photo",
+        "rules": [
+            "Individual participation",
+            "Both mobile and DSLR categories",
+            "No heavy editing allowed"
+        ],
+        "eligibility": "Open to all"
+    },
+    {
+        "id": "rangoli",
+        "name": "Rangoli",
+        "parentEvent": "Kalakruti",
+        "description": "Create beautiful traditional rangoli designs. Showcase your creativity and cultural artistry.",
+        "poster": null,
+        "formLink": "https://forms.google.com/kalakruti-rangoli",
+        "rules": [
+            "Team of 2-4",
+            "Materials provided",
+            "Time limit: 2 hours"
+        ],
+        "eligibility": "Open to all"
+    },
+    {
+        "id": "poster-making",
+        "name": "Poster Making",
+        "parentEvent": "Kalakruti",
+        "description": "Design impactful posters on given themes. Combine art and message effectively.",
+        "poster": null,
+        "formLink": "https://forms.google.com/kalakruti-poster",
+        "rules": [
+            "Individual participation",
+            "Chart paper provided",
+            "Bring your own colors"
+        ],
+        "eligibility": "Open to all"
+    },
+    {
+        "id": "stabila",
+        "name": "Stabila",
+        "parentEvent": "Stabila",
+        "description": "Test the stability and control of your robot. Navigate through obstacles and maintain balance in this engineering marvel.",
+        "poster": null,
+        "formLink": "https://forms.google.com/stabila",
+        "rules": [
+            "Team of 2-4",
+            "Robot dimensions: 30x30cm max",
+            "Self-balancing robots only"
+        ],
+        "eligibility": "Engineering students"
+    }
+]
