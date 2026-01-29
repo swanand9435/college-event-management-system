@@ -1,54 +1,15 @@
 [
     {
-        "id": "prompt-engineering",
-        "name": "Prompt Engineering",
+        "id": "brainbyte",
+        "name": "BrainByte",
         "parentEvent": "BrainByte",
-        "description": "Master the art of crafting effective prompts for AI systems. Learn techniques to get optimal outputs from language models.",
-        "poster": null,
-        "formLink": "https://forms.google.com/brainbyte-prompt",
+        "description": "Master the art of AI and machine learning. Compete in challenges involving prompt engineering, model selection, and AI reasoning.",
+        "poster": "/assets/posters/brainbite.png",
+        "formLink": "https://forms.google.com/brainbyte",
         "rules": [
             "Individual participation",
-            "Online round followed by finals"
-        ],
-        "eligibility": "Open to all students"
-    },
-    {
-        "id": "model-selection",
-        "name": "Model Selection",
-        "parentEvent": "BrainByte",
-        "description": "Choose the right AI model for the task. Evaluate and select optimal models for various use cases.",
-        "poster": null,
-        "formLink": "https://forms.google.com/brainbyte-model",
-        "rules": [
-            "Individual participation",
-            "Problem-solving based evaluation"
-        ],
-        "eligibility": "Open to all students"
-    },
-    {
-        "id": "ai-debugging",
-        "name": "AI Debugging Without Code",
-        "parentEvent": "BrainByte",
-        "description": "Debug AI outputs without writing code. Use logical reasoning to identify and fix AI behavior issues.",
-        "poster": null,
-        "formLink": "https://forms.google.com/brainbyte-debug",
-        "rules": [
-            "Individual participation",
-            "No coding required"
-        ],
-        "eligibility": "Open to all students"
-    },
-    {
-        "id": "ai-reasoning-test",
-        "name": "Online AI Reasoning Test",
-        "parentEvent": "BrainByte",
-        "description": "Selection round testing your AI reasoning abilities. Top performers advance to the main event.",
-        "poster": null,
-        "formLink": "https://forms.google.com/brainbyte-reasoning",
-        "rules": [
-            "Individual participation",
-            "Online MCQ-based test",
-            "Selection round for main events"
+            "Multiple rounds including online and offline",
+            "AI reasoning and problem-solving based"
         ],
         "eligibility": "Open to all students"
     },
@@ -57,7 +18,7 @@
         "name": "Best Out of Waste",
         "parentEvent": "Kalakruti",
         "description": "Transform waste materials into creative art pieces. Showcase your innovation and environmental consciousness.",
-        "poster": null,
+        "poster": "/assets/posters/best out of waste.webp",
         "formLink": "https://forms.google.com/kalakruti-waste",
         "rules": [
             "Individual or team of 2",
@@ -71,7 +32,7 @@
         "name": "Mehendi",
         "parentEvent": "Kalakruti",
         "description": "Showcase your mehendi artistry skills. Create intricate and beautiful henna designs.",
-        "poster": null,
+        "poster": "/assets/posters/Mehendi.webp",
         "formLink": "https://forms.google.com/kalakruti-mehendi",
         "rules": [
             "Individual participation",
@@ -85,7 +46,7 @@
         "name": "Reel/Short Making",
         "parentEvent": "Kalakruti",
         "description": "Create engaging short-form video content. Show off your storytelling and editing skills.",
-        "poster": null,
+        "poster": "/assets/posters/reel making.webp",
         "formLink": "https://forms.google.com/kalakruti-reel",
         "rules": [
             "Individual or team of 3",
@@ -95,11 +56,11 @@
         "eligibility": "Open to all"
     },
     {
-        "id": "origami-quilling",
-        "name": "Origami/Quilling/Knitting",
+        "id": "origami-craft",
+        "name": "Origami / Craft",
         "parentEvent": "Kalakruti",
-        "description": "Create beautiful paper art through origami, quilling, or knitting techniques.",
-        "poster": null,
+        "description": "Create beautiful paper art through origami and various craft techniques.",
+        "poster": "/assets/posters/origamy.webp",
         "formLink": "https://forms.google.com/kalakruti-origami",
         "rules": [
             "Individual participation",
@@ -113,7 +74,7 @@
         "name": "Cup & Mug Painting",
         "parentEvent": "Kalakruti",
         "description": "Transform plain cups and mugs into artistic masterpieces with your creative painting skills.",
-        "poster": null,
+        "poster": "/assets/posters/Cup & Mug Painting.webp",
         "formLink": "https://forms.google.com/kalakruti-cup",
         "rules": [
             "Individual participation",
@@ -127,7 +88,7 @@
         "name": "Pot Painting",
         "parentEvent": "Kalakruti",
         "description": "Decorate terracotta pots with vibrant colors and creative designs.",
-        "poster": null,
+        "poster": "/assets/posters/pot painting.webp",
         "formLink": "https://forms.google.com/kalakruti-pot",
         "rules": [
             "Individual participation",
@@ -137,11 +98,11 @@
         "eligibility": "Open to all"
     },
     {
-        "id": "painting-sketching",
-        "name": "Painting & Sketching",
+        "id": "painting",
+        "name": "Painting",
         "parentEvent": "Kalakruti",
-        "description": "Express your artistic vision through painting or sketching. Theme announced on spot.",
-        "poster": null,
+        "description": "Express your artistic vision through painting. Theme announced on spot.",
+        "poster": "/assets/posters/painting.webp",
         "formLink": "https://forms.google.com/kalakruti-paint",
         "rules": [
             "Individual participation",
@@ -151,15 +112,43 @@
         "eligibility": "Open to all"
     },
     {
-        "id": "photography",
-        "name": "Mobile & DSLR Photography",
+        "id": "sketching",
+        "name": "Sketching",
         "parentEvent": "Kalakruti",
-        "description": "Capture stunning photographs using your mobile or DSLR camera. Theme-based competition.",
-        "poster": null,
-        "formLink": "https://forms.google.com/kalakruti-photo",
+        "description": "Express your artistic vision through sketching. Theme announced on spot.",
+        "poster": "/assets/posters/sketching.webp",
+        "formLink": "https://forms.google.com/kalakruti-sketch",
         "rules": [
             "Individual participation",
-            "Both mobile and DSLR categories",
+            "Bring your own materials",
+            "Time limit: 2 hours"
+        ],
+        "eligibility": "Open to all"
+    },
+    {
+        "id": "dslr-photography",
+        "name": "DSLR Photography",
+        "parentEvent": "Kalakruti",
+        "description": "Capture stunning photographs using your DSLR camera. Theme-based competition.",
+        "poster": "/assets/posters/DSLR photography.webp",
+        "formLink": "https://forms.google.com/kalakruti-dslr",
+        "rules": [
+            "Individual participation",
+            "DSLR cameras only",
+            "No heavy editing allowed"
+        ],
+        "eligibility": "Open to all"
+    },
+    {
+        "id": "mobile-photography",
+        "name": "Mobile Photography",
+        "parentEvent": "Kalakruti",
+        "description": "Capture stunning photographs using your mobile camera. Theme-based competition.",
+        "poster": "/assets/posters/mobile photography.webp",
+        "formLink": "https://forms.google.com/kalakruti-mobile",
+        "rules": [
+            "Individual participation",
+            "Mobile cameras only",
             "No heavy editing allowed"
         ],
         "eligibility": "Open to all"
@@ -169,7 +158,7 @@
         "name": "Rangoli",
         "parentEvent": "Kalakruti",
         "description": "Create beautiful traditional rangoli designs. Showcase your creativity and cultural artistry.",
-        "poster": null,
+        "poster": "/assets/posters/rangoli.webp",
         "formLink": "https://forms.google.com/kalakruti-rangoli",
         "rules": [
             "Team of 2-4",
@@ -183,7 +172,7 @@
         "name": "Poster Making",
         "parentEvent": "Kalakruti",
         "description": "Design impactful posters on given themes. Combine art and message effectively.",
-        "poster": null,
+        "poster": "/assets/posters/poster making.webp",
         "formLink": "https://forms.google.com/kalakruti-poster",
         "rules": [
             "Individual participation",
@@ -197,7 +186,7 @@
         "name": "Stabila",
         "parentEvent": "Stabila",
         "description": "Test the stability and control of your robot. Navigate through obstacles and maintain balance in this engineering marvel.",
-        "poster": null,
+        "poster": "/assets/posters/stabila.png",
         "formLink": "https://forms.google.com/stabila",
         "rules": [
             "Team of 2-4",

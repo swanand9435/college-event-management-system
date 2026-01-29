@@ -453,8 +453,199 @@ section {
   z-index: 1;
 }
 
+/* Event Grid Layout Enhancement */
+.events-grid-container {
+  /* Enhanced grid system with 4 cards per row */
+  --grid-gap-mobile: 1rem;
+  --grid-gap-tablet: 1.5rem;
+  --grid-gap-desktop: 2rem;
+  --grid-columns-mobile: 1;
+  --grid-columns-tablet: 2;
+  --grid-columns-desktop: 4;
+  --grid-max-width: 1400px;
+  
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns-mobile), 1fr);
+  gap: var(--grid-gap-mobile);
+  width: 100%;
+  max-width: var(--grid-max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  
+  /* Ensure proper alignment */
+  align-items: stretch;
+  justify-items: stretch;
+}
+
+/* Responsive grid adjustments */
+@media (min-width: 768px) {
+  .events-grid-container {
+    grid-template-columns: repeat(var(--grid-columns-tablet), 1fr);
+    gap: var(--grid-gap-tablet);
+    padding: 0 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .events-grid-container {
+    grid-template-columns: repeat(var(--grid-columns-desktop), 1fr);
+    gap: var(--grid-gap-desktop);
+    padding: 0 3rem;
+  }
+}
+
+/* Grid item styling for consistent alignment */
+.events-grid-item {
+  width: 100%;
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+}
+
+/* Ensure cards fill the grid item properly */
+.events-grid-item .event-card-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Enhanced empty state styling */
+.events-empty-state {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  min-height: 300px;
+}
+
+/* Grid container wrapper for better spacing */
+.events-grid-section {
+  --section-padding-mobile: 1.5rem;
+  --section-padding-tablet: 2rem;
+  --section-padding-desktop: 3rem;
+  
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 var(--section-padding-mobile);
+}
+
+@media (min-width: 768px) {
+  .events-grid-section {
+    padding: 0 var(--section-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .events-grid-section {
+    padding: 0 var(--section-padding-desktop);
+  }
+}
+
+/* Perfect Event Card Uniformity - Zero Layout Differences */
+.event-card-uniform {
+  /* Absolute fixed dimensions - NO variations allowed */
+  width: 100% !important;
+  height: 300px !important;
+  border-radius: 12px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
+}
+
+/* Grid system for perfect 4-card rows */
+.events-grid-container {
+  display: grid !important;
+  grid-template-columns: repeat(1, 1fr) !important;
+  gap: 24px !important;
+  width: 100% !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+  box-sizing: border-box !important;
+}
+
+/* Responsive grid - maintaining perfect uniformity */
+@media (min-width: 768px) {
+  .events-grid-container {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
+    padding: 0 32px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .events-grid-container {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 24px !important;
+    padding: 0 40px !important;
+  }
+}
+
+/* Grid items - perfect alignment */
+.events-grid-item {
+  width: 100% !important;
+  height: 300px !important;
+  display: flex !important;
+  justify-content: stretch !important;
+  align-items: stretch !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure all cards fill grid items identically */
+.events-grid-item .event-card-uniform {
+  width: 100% !important;
+  height: 100% !important;
+  flex: 1 !important;
+}
+
+/* Remove old CSS that might cause variations */
+.event-card-container,
+.event-card-poster,
+.event-card-content,
+.event-card-title-container,
+.event-card-buttons {
+  /* Override any existing styles */
+  all: unset;
+}
+
+/* Enhanced empty state styling */
+.events-empty-state {
+  grid-column: 1 / -1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 64px 32px !important;
+  min-height: 300px !important;
+}
+
+/* Grid container wrapper for consistent spacing */
+.events-grid-section {
+  width: 100% !important;
+  max-width: 1600px !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+  box-sizing: border-box !important;
+}
+
+@media (min-width: 768px) {
+  .events-grid-section {
+    padding: 0 32px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .events-grid-section {
+    padding: 0 48px !important;
+  }
+}
 /* Prevent horizontal scroll */
 body {
   overflow-x: hidden;
   width: 100%;
 }
+/* Event Card Standardization */

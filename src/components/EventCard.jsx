@@ -31,8 +31,15 @@ export default function EventCard({ event }) {
     return (
         <div
             ref={cardRef}
-            className="group relative rounded-xl overflow-hidden transition-all duration-300 ease-out bg-white/5 border border-white/10 hover:border-cyan-400/30 w-full h-full flex flex-col"
-            style={{ transform }}
+            className="event-card-uniform group relative overflow-hidden transition-all duration-300 ease-out bg-white/5 border border-white/10 hover:border-cyan-400/30"
+            style={{ 
+                transform,
+                width: '100%',
+                height: '300px',
+                borderRadius: '12px',
+                display: 'flex',
+                flexDirection: 'column'
+            }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
@@ -44,64 +51,130 @@ export default function EventCard({ event }) {
                 }}
             />
 
-            {/* Poster Section (Compact 16:9) */}
-            <div className="relative aspect-video overflow-hidden w-full bg-deep-black/50 shrink-0">
-                {event.poster ? (
-                    <img
-                        src={event.poster}
-                        alt={event.name}
-                        className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                        onError={(e) => {
-                            e.target.style.display = 'none'
-                            // Show fallback if image fails
-                            e.target.nextSibling.style.display = 'flex'
-                        }}
-                    />
-                ) : null}
-
-                {/* Fallback Placeholder */}
-                <div
-                    className="absolute inset-0 bg-gradient-to-br from-deep-black via-purple-900/20 to-deep-black flex items-center justify-center"
-                    style={{ display: event.poster ? 'none' : 'flex' }}
+            {/* Vertical Layout: Fixed dimensions for perfect uniformity */}
+            <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                {/* Poster Section - Exact dimensions */}
+                <div 
+                    className="relative overflow-hidden bg-deep-black/50"
+                    style={{ 
+                        width: '100%', 
+                        height: '180px', 
+                        flexShrink: 0 
+                    }}
                 >
-                    <span className="font-display font-bold text-4xl text-white/20">
-                        {event.name.charAt(0)}
-                    </span>
-                </div>
-            </div>
+                    {event.poster ? (
+                        <img
+                            src={event.poster}
+                            alt={event.name}
+                            className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                            onError={(e) => {
+                                e.target.style.display = 'none'
+                                // Show fallback if image fails
+                                e.target.nextSibling.style.display = 'flex'
+                            }}
+                        />
+                    ) : null}
 
-            {/* Content Section */}
-            <div className="flex-1 p-5 flex flex-col items-center text-center">
-                <div className="flex-1 w-full flex items-center justify-center mb-6 min-h-[3.5rem]">
-                    <h3 className="font-display font-semibold text-lg text-white/90 group-hover:text-neon-cyan transition-colors w-full line-clamp-2">
-                        {event.name}
-                    </h3>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="w-full grid grid-cols-2 gap-3 mt-auto">
-                    <a
-                        href={event.formLink || '#'}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-primary w-full !px-3 !py-3 !text-xs md:!text-sm !gap-2 justify-center"
+                    {/* Fallback Placeholder */}
+                    <div
+                        className="absolute inset-0 bg-gradient-to-br from-deep-black via-purple-900/20 to-deep-black flex items-center justify-center"
+                        style={{ display: event.poster ? 'none' : 'flex' }}
                     >
-                        <span>Register</span>
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                    </a>
+                        <span className="font-display font-bold text-3xl text-white/20">
+                            {event.name.charAt(0)}
+                        </span>
+                    </div>
+                </div>
 
-                    <a
-                        href={`/events/${event.id}`}
-                        className="btn-secondary w-full !px-3 !py-3 !text-xs md:!text-sm !gap-2 justify-center"
+                {/* Content Section - Fixed dimensions */}
+                <div 
+                    style={{ 
+                        flex: 1,
+                        height: '120px',
+                        padding: '16px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between'
+                    }}
+                >
+                    {/* Title container - Fixed height and positioning */}
+                    <div 
+                        style={{ 
+                            height: '48px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            textAlign: 'center',
+                            overflow: 'hidden',
+                            flexShrink: 0
+                        }}
                     >
-                        <span>Details</span>
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                    </a>
+                        <h3 
+                            className="font-display font-semibold text-white/90 group-hover:text-neon-cyan transition-colors"
+                            style={{
+                                fontSize: '14px',
+                                lineHeight: '18px',
+                                width: '100%',
+                                display: '-webkit-box',
+                                WebkitLineClamp: 2,
+                                WebkitBoxOrient: 'vertical',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis'
+                            }}
+                        >
+                            {event.name}
+                        </h3>
+                    </div>
+
+                    {/* Action Buttons - Fixed dimensions and spacing */}
+                    <div 
+                        style={{ 
+                            height: '36px',
+                            display: 'grid',
+                            gridTemplateColumns: '1fr 1fr',
+                            gap: '8px',
+                            flexShrink: 0,
+                            marginTop: 'auto'
+                        }}
+                    >
+                        <a
+                            href={event.formLink || '#'}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-primary font-medium"
+                            style={{
+                                width: '100%',
+                                height: '36px',
+                                padding: '0 8px',
+                                fontSize: '12px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                textDecoration: 'none',
+                                borderRadius: '6px'
+                            }}
+                        >
+                            <span>Register</span>
+                        </a>
+
+                        <a
+                            href={`/events/${event.id}`}
+                            className="btn-secondary font-medium"
+                            style={{
+                                width: '100%',
+                                height: '36px',
+                                padding: '0 8px',
+                                fontSize: '12px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                textDecoration: 'none',
+                                borderRadius: '6px'
+                            }}
+                        >
+                            <span>See Details</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
