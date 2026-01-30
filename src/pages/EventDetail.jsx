@@ -1,15 +1,93 @@
+import { useState, useEffect, useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import Timeline from '../components/Timeline'
+import { gsap } from 'gsap'
 import eventsData from '../data/events.json'
+
+// Collapsible Section Component
+function CollapsibleSection({ title, icon, children, defaultOpen = false, highlight = false }) {
+    const [isOpen, setIsOpen] = useState(defaultOpen)
+    const contentRef = useRef(null)
+    const [height, setHeight] = useState(defaultOpen ? 'auto' : 0)
+
+    useEffect(() => {
+        if (isOpen) {
+            const contentHeight = contentRef.current?.scrollHeight
+            setHeight(contentHeight)
+            // After transition, set to auto for dynamic content
+            const timer = setTimeout(() => setHeight('auto'), 300)
+            return () => clearTimeout(timer)
+        } else {
+            // First set to actual height, then to 0 for smooth animation
+            const contentHeight = contentRef.current?.scrollHeight
+            setHeight(contentHeight)
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    setHeight(0)
+                })
+            })
+        }
+    }, [isOpen])
+
+    return (
+        <div className={`collapsible-section ${highlight ? 'highlight-section' : ''}`}>
+            <button
+                className="collapsible-header"
+                onClick={() => setIsOpen(!isOpen)}
+                aria-expanded={isOpen}
+            >
+                <div className="collapsible-title">
+                    <span className="collapsible-icon">{icon}</span>
+                    <h3>{title}</h3>
+                </div>
+                <svg
+                    className={`chevron-icon ${isOpen ? 'rotate' : ''}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+            <div
+                className="collapsible-content"
+                style={{ height: typeof height === 'number' ? `${height}px` : height }}
+            >
+                <div ref={contentRef} className="collapsible-inner">
+                    {children}
+                </div>
+            </div>
+        </div>
+    )
+}
 
 export default function EventDetail() {
     const { id } = useParams()
     const event = eventsData.find((e) => e.id === id)
+    const pageRef = useRef(null)
+
+    useEffect(() => {
+        // GSAP animations on page load
+        if (pageRef.current) {
+            gsap.fromTo(
+                '.event-detail-animate',
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    stagger: 0.1,
+                    ease: 'power2.out',
+                }
+            )
+        }
+    }, [id])
 
     if (!event) {
         return (
             <div className="min-h-screen bg-deep-black pt-24 flex items-center justify-center">
-                <div className="text-center">
+                <div className="text-center event-detail-animate">
                     <div className="text-8xl mb-6">🔍</div>
                     <h1 className="font-display text-4xl text-white mb-4">Event Not Found</h1>
                     <p className="text-white/60 mb-8">The event you're looking for doesn't exist.</p>
@@ -21,150 +99,259 @@ export default function EventDetail() {
         )
     }
 
-    const getCategoryColor = (category) => {
-        const colors = {
-            'Technical': 'from-neon-cyan to-aurora-blue',
-            'Robotics': 'from-electric-purple to-pink-500',
-            'Design': 'from-orange-400 to-pink-500',
-            'Literary': 'from-green-400 to-emerald-500',
-            'Business': 'from-yellow-400 to-orange-500',
-        }
-        return colors[category] || 'from-neon-cyan to-electric-purple'
+    // Format theme as array for consistent handling
+    const themes = Array.isArray(event.theme) ? event.theme : (event.theme ? [event.theme] : [])
+    const hasThemes = themes.length > 0
+    const hasRules = event.rules && event.rules.length > 0
+    const hasPrizes = event.prizeDetails && Object.keys(event.prizeDetails).length > 0
+    const hasVenue = event.venueDate && (event.venueDate.venue || event.venueDate.date)
+    const hasCoordinator = event.coordinator && (event.coordinator.name || event.coordinator.phone)
+
+    // Format phone number for tel link
+    const formatPhoneLink = (phone) => {
+        if (!phone) return null
+        // Handle multiple phone numbers
+        const phones = phone.split('/').map(p => p.trim())
+        return phones
     }
 
     return (
-        <div className="min-h-screen bg-deep-black pt-24 pb-16">
-            {/* Hero Banner */}
-            <section className="relative h-[40vh] min-h-[300px] overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-deep-black via-purple-900/20 to-deep-black flex items-center justify-center">
-                    <div className={`w-32 h-32 rounded-2xl bg-gradient-to-br ${getCategoryColor(event.category)} flex items-center justify-center`}>
-                        <span className="font-display font-bold text-6xl text-deep-black">
-                            {event.name.charAt(0)}
-                        </span>
-                    </div>
+        <div ref={pageRef} className="min-h-screen bg-deep-black pt-24 pb-16">
+            {/* Hero Section with Background */}
+            <section className="event-detail-hero">
+                <div className="event-detail-hero-bg">
+                    {event.poster && (
+                        <img
+                            src={event.poster}
+                            alt=""
+                            className="event-detail-hero-image"
+                            onError={(e) => e.target.style.display = 'none'}
+                        />
+                    )}
+                    <div className="event-detail-hero-overlay"></div>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-transparent" />
 
                 {/* Back Button */}
-                <Link
-                    to="/events"
-                    className="absolute top-8 left-8 flex items-center gap-2 text-white/70 hover:text-white transition-colors"
-                >
+                <Link to="/events" className="event-detail-back-btn event-detail-animate">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
-                    Back to Events
+                    <span>Back to Events</span>
                 </Link>
+
+                {/* Centered Event Title */}
+                <div className="event-detail-title-container event-detail-animate">
+                    <span className="event-detail-parent-tag">{event.parentEvent}</span>
+                    <h1 className="event-detail-title">{event.name}</h1>
+                    <div className="event-detail-title-underline"></div>
+                </div>
             </section>
 
-            {/* Event Details */}
-            <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-10">
-                {/* Header Card */}
-                <div className="glass-card p-8 mb-8">
-                    <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
-                        <div>
-                            <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${getCategoryColor(event.category)} text-deep-black mb-4`}>
-                                {event.category}
-                            </span>
-                            <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
-                                {event.name}
-                            </h1>
+            {/* Main Content */}
+            <section className="event-detail-content">
+                {/* Description Card */}
+                <div className="event-detail-card event-detail-animate">
+                    <div className="event-detail-description">
+                        <p>{event.description}</p>
+                    </div>
+
+                    {/* BrainByte Placeholder */}
+                    {!event.detailsAvailable && (
+                        <div className="event-detail-placeholder">
+                            <div className="placeholder-icon">🚀</div>
+                            <h3>Coming Soon</h3>
+                            <p>Details will be updated soon. Stay tuned!</p>
                         </div>
+                    )}
+
+                    {/* Register Button - Top */}
+                    {event.detailsAvailable && (
+                        <div className="event-detail-cta-top">
+                            <a
+                                href={event.formLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn-primary event-detail-register-btn"
+                            >
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                                Register Now
+                            </a>
+                        </div>
+                    )}
+                </div>
+
+                {/* Collapsible Sections Grid */}
+                {event.detailsAvailable && (
+                    <div className="event-detail-sections-grid">
+                        {/* Left Column */}
+                        <div className="event-detail-column">
+                            {/* Theme Section */}
+                            {hasThemes && (
+                                <div className="event-detail-animate">
+                                    <CollapsibleSection title="Theme" icon="🎨" defaultOpen={true}>
+                                        <ul className="theme-list">
+                                            {themes.map((theme, index) => (
+                                                <li key={index} className="theme-item">
+                                                    <span className="theme-bullet">◆</span>
+                                                    <span>{theme}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </CollapsibleSection>
+                                </div>
+                            )}
+
+                            {/* Rules Section */}
+                            {hasRules && (
+                                <div className="event-detail-animate">
+                                    <CollapsibleSection title="Rules" icon="📋" defaultOpen={true}>
+                                        <ul className="rules-list">
+                                            {event.rules.map((rule, index) => (
+                                                <li key={index} className="rule-item">
+                                                    <span className="rule-number">{index + 1}</span>
+                                                    <span>{rule}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </CollapsibleSection>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Right Column */}
+                        <div className="event-detail-column">
+                            {/* Prizes Section */}
+                            {hasPrizes && (
+                                <div className="event-detail-animate">
+                                    <CollapsibleSection title="Prizes" icon="🏆" defaultOpen={true} highlight={true}>
+                                        <div className="prizes-container">
+                                            {event.prizeDetails.first && (
+                                                <div className="prize-item prize-first">
+                                                    <div className="prize-medal">🥇</div>
+                                                    <div className="prize-info">
+                                                        <span className="prize-label">1st Place</span>
+                                                        <span className="prize-value">{event.prizeDetails.first}</span>
+                                                    </div>
+                                                </div>
+                                            )}
+                                            {event.prizeDetails.second && (
+                                                <div className="prize-item prize-second">
+                                                    <div className="prize-medal">🥈</div>
+                                                    <div className="prize-info">
+                                                        <span className="prize-label">2nd Place</span>
+                                                        <span className="prize-value">{event.prizeDetails.second}</span>
+                                                    </div>
+                                                </div>
+                                            )}
+                                            {event.prizeDetails.third && (
+                                                <div className="prize-item prize-third">
+                                                    <div className="prize-medal">🥉</div>
+                                                    <div className="prize-info">
+                                                        <span className="prize-label">3rd Place</span>
+                                                        <span className="prize-value">{event.prizeDetails.third}</span>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </CollapsibleSection>
+                                </div>
+                            )}
+
+                            {/* Venue & Date Section */}
+                            {hasVenue && (
+                                <div className="event-detail-animate">
+                                    <CollapsibleSection title="Venue & Date" icon="📍" defaultOpen={true}>
+                                        <div className="venue-container">
+                                            {event.venueDate.venue && (
+                                                <div className="venue-item">
+                                                    <svg className="venue-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    </svg>
+                                                    <span>{event.venueDate.venue}</span>
+                                                </div>
+                                            )}
+                                            {event.venueDate.date && (
+                                                <div className="venue-item">
+                                                    <svg className="venue-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                    </svg>
+                                                    <span className="venue-date-highlight">{event.venueDate.date}</span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </CollapsibleSection>
+                                </div>
+                            )}
+
+                            {/* Coordinator Contact Section */}
+                            {hasCoordinator && (
+                                <div className="event-detail-animate">
+                                    <CollapsibleSection title="Coordinator" icon="📞" defaultOpen={true}>
+                                        <div className="coordinator-container">
+                                            {event.coordinator.name && (
+                                                <div className="coordinator-item">
+                                                    <svg className="coordinator-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                                    </svg>
+                                                    <span className="coordinator-name">{event.coordinator.name}</span>
+                                                </div>
+                                            )}
+                                            {event.coordinator.phone && (
+                                                <div className="coordinator-phones">
+                                                    {formatPhoneLink(event.coordinator.phone).map((phone, index) => (
+                                                        <a
+                                                            key={index}
+                                                            href={`tel:+91${phone.replace(/\s/g, '')}`}
+                                                            className="coordinator-phone-link"
+                                                        >
+                                                            <svg className="coordinator-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                                            </svg>
+                                                            <span>+91 {phone}</span>
+                                                        </a>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </CollapsibleSection>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
+
+                {/* Eligibility Badge */}
+                {event.eligibility && event.detailsAvailable && (
+                    <div className="event-detail-eligibility event-detail-animate">
+                        <span className="eligibility-icon">✅</span>
+                        <span className="eligibility-text">Eligibility: {event.eligibility}</span>
+                    </div>
+                )}
+
+                {/* Bottom Action Buttons */}
+                <div className="event-detail-actions event-detail-animate">
+                    {event.detailsAvailable && (
                         <a
                             href={event.formLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="btn-primary"
+                            className="btn-primary event-detail-action-btn"
                         >
-                            Register Now
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                            Register for {event.name}
                         </a>
-                    </div>
-
-                    <p className="text-white/70 text-lg leading-relaxed">
-                        {event.description}
-                    </p>
-                </div>
-
-                {/* Info Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                    {/* Rules */}
-                    <div className="glass-card p-6">
-                        <h3 className="font-display text-xl font-semibold text-neon-cyan mb-4 flex items-center gap-2">
-                            <span>📋</span> Rules
-                        </h3>
-                        <ul className="space-y-3">
-                            {event.rules.map((rule, index) => (
-                                <li key={index} className="flex items-start gap-3 text-white/70">
-                                    <span className="text-neon-cyan mt-1">•</span>
-                                    <span>{rule}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Prizes */}
-                    <div className="glass-card p-6">
-                        <h3 className="font-display text-xl font-semibold text-neon-cyan mb-4 flex items-center gap-2">
-                            <span>🏆</span> Prizes
-                        </h3>
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-2xl">
-                                    🥇
-                                </div>
-                                <div>
-                                    <div className="text-white/50 text-sm">1st Place</div>
-                                    <div className="text-white font-semibold text-lg">{event.prizes.first}</div>
-                                </div>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center text-2xl">
-                                    🥈
-                                </div>
-                                <div>
-                                    <div className="text-white/50 text-sm">2nd Place</div>
-                                    <div className="text-white font-semibold text-lg">{event.prizes.second}</div>
-                                </div>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-2xl">
-                                    🥉
-                                </div>
-                                <div>
-                                    <div className="text-white/50 text-sm">3rd Place</div>
-                                    <div className="text-white font-semibold text-lg">{event.prizes.third}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Eligibility */}
-                <div className="glass-card p-6 mb-12">
-                    <h3 className="font-display text-xl font-semibold text-neon-cyan mb-4 flex items-center gap-2">
-                        <span>✅</span> Eligibility
-                    </h3>
-                    <p className="text-white/70">{event.eligibility}</p>
-                </div>
-
-                {/* Timeline */}
-                <div className="mb-12">
-                    <h3 className="font-display text-2xl font-semibold text-white mb-8 text-center">
-                        Event <span className="text-gradient">Timeline</span>
-                    </h3>
-                    <Timeline timeline={event.timeline} />
-                </div>
-
-                {/* CTA */}
-                <div className="text-center">
-                    <a
-                        href={event.formLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-primary text-lg px-12 py-4"
-                    >
-                        Register for {event.name}
-                    </a>
+                    )}
+                    <Link to="/events" className="btn-secondary event-detail-action-btn">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        Back to Events
+                    </Link>
                 </div>
             </section>
         </div>
