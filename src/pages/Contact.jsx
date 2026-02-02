@@ -36,6 +36,23 @@ export default function Contact() {
             )
         },
         {
+            icon: '💬',
+            title: 'WhatsApp Group',
+            content: (
+                <div>
+                    <p>Join for latest updates</p>
+                    <a
+                        href="https://chat.whatsapp.com/Ex5ew4AWrdN1hfHCm5Q0yj"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-neon-cyan mt-1 inline-block hover:underline"
+                    >
+                        Join Group →
+                    </a>
+                </div>
+            )
+        },
+        {
             icon: '🕒',
             title: 'Working Hours',
             content: (

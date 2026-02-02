@@ -42,7 +42,11 @@ export default function Home() {
         { value: '3 Days', label: 'of Innovation' },
     ]
 
-    const featuredEvents = eventsData.slice(0, 3)
+    const targetEvents = ['stabilia', 'brainbyte', 'kalakruti']
+    const featuredEvents = eventsData
+        .filter(event => targetEvents.includes(event.id))
+        .sort((a, b) => targetEvents.indexOf(a.id) - targetEvents.indexOf(b.id))
+        .map(event => ({ ...event, showExploreOnly: true }))
 
     return (
         <div className="bg-deep-black">
@@ -119,6 +123,14 @@ export default function Home() {
                             <Link to="/schedule" className="btn-secondary text-sm px-6 py-2.5">
                                 View Schedule
                             </Link>
+                            <a
+                                href="https://chat.whatsapp.com/Ex5ew4AWrdN1hfHCm5Q0yj"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold uppercase tracking-wider rounded-lg border border-neon-cyan/20 text-neon-cyan hover:bg-neon-cyan/10 transition-all duration-300"
+                            >
+                                Join WhatsApp Group
+                            </a>
                         </div>
                     </div>
                 </div>

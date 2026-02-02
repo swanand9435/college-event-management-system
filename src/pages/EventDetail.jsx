@@ -218,6 +218,31 @@ export default function EventDetail() {
                                     </CollapsibleSection>
                                 </div>
                             )}
+
+                            {/* Rulebook Section */}
+                            {event.rulebook && (
+                                <div className="event-detail-animate">
+                                    <CollapsibleSection title="Rulebook" icon="📜" defaultOpen={true}>
+                                        <div className="flex flex-col gap-4">
+                                            <p className="text-white/80">
+                                                Download the detailed rulebook for complete guidelines and instructions.
+                                            </p>
+                                            <a
+                                                href={event.rulebook}
+                                                download
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="btn-primary flex items-center justify-center gap-2 w-full sm:w-auto"
+                                            >
+                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                </svg>
+                                                Download Rulebook PDF
+                                            </a>
+                                        </div>
+                                    </CollapsibleSection>
+                                </div>
+                            )}
                         </div>
 
                         {/* Right Column */}
@@ -323,11 +348,19 @@ export default function EventDetail() {
                     </div>
                 )}
 
-                {/* Eligibility Badge */}
-                {event.eligibility && event.detailsAvailable && (
-                    <div className="event-detail-eligibility event-detail-animate">
-                        <span className="eligibility-icon">✅</span>
-                        <span className="eligibility-text">Eligibility: {event.eligibility}</span>
+                {/* Eligibility & Free Entry Badges */}
+                {event.detailsAvailable && (
+                    <div className="event-detail-badges event-detail-animate">
+                        {event.eligibility && (
+                            <div className="event-detail-eligibility">
+                                <span className="eligibility-icon">✅</span>
+                                <span className="eligibility-text">Eligibility: {event.eligibility}</span>
+                            </div>
+                        )}
+                        <div className="event-detail-free-entry">
+                            <span className="free-entry-icon">🎟️</span>
+                            <span className="free-entry-text">Free Entry</span>
+                        </div>
                     </div>
                 )}
 

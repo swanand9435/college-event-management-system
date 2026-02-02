@@ -32,7 +32,7 @@ export default function EventCard({ event }) {
         <div
             ref={cardRef}
             className="event-card-uniform group relative overflow-hidden transition-all duration-300 ease-out bg-white/5 border border-white/10 hover:border-cyan-400/30"
-            style={{ 
+            style={{
                 transform,
                 width: '100%',
                 height: '300px',
@@ -54,12 +54,12 @@ export default function EventCard({ event }) {
             {/* Vertical Layout: Fixed dimensions for perfect uniformity */}
             <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                 {/* Poster Section - Exact dimensions */}
-                <div 
+                <div
                     className="relative overflow-hidden bg-deep-black/50"
-                    style={{ 
-                        width: '100%', 
-                        height: '180px', 
-                        flexShrink: 0 
+                    style={{
+                        width: '100%',
+                        height: '180px',
+                        flexShrink: 0
                     }}
                 >
                     {event.poster ? (
@@ -87,8 +87,8 @@ export default function EventCard({ event }) {
                 </div>
 
                 {/* Content Section - Fixed dimensions */}
-                <div 
-                    style={{ 
+                <div
+                    style={{
                         flex: 1,
                         height: '120px',
                         padding: '16px',
@@ -98,8 +98,8 @@ export default function EventCard({ event }) {
                     }}
                 >
                     {/* Title container - Fixed height and positioning */}
-                    <div 
-                        style={{ 
+                    <div
+                        style={{
                             height: '48px',
                             display: 'flex',
                             alignItems: 'center',
@@ -109,7 +109,7 @@ export default function EventCard({ event }) {
                             flexShrink: 0
                         }}
                     >
-                        <h3 
+                        <h3
                             className="font-display font-semibold text-white/90 group-hover:text-neon-cyan transition-colors"
                             style={{
                                 fontSize: '14px',
@@ -127,53 +127,75 @@ export default function EventCard({ event }) {
                     </div>
 
                     {/* Action Buttons - Fixed dimensions and spacing */}
-                    <div 
-                        style={{ 
+                    <div
+                        style={{
                             height: '36px',
                             display: 'grid',
-                            gridTemplateColumns: '1fr 1fr',
+                            gridTemplateColumns: event.showExploreOnly ? '1fr' : '1fr 1fr',
                             gap: '8px',
                             flexShrink: 0,
                             marginTop: 'auto'
                         }}
                     >
-                        <a
-                            href={event.formLink || '#'}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn-primary font-medium"
-                            style={{
-                                width: '100%',
-                                height: '36px',
-                                padding: '0 8px',
-                                fontSize: '12px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                textDecoration: 'none',
-                                borderRadius: '6px'
-                            }}
-                        >
-                            <span>Register</span>
-                        </a>
+                        {event.showExploreOnly ? (
+                            <a
+                                href="/events"
+                                className="btn-primary font-medium"
+                                style={{
+                                    width: '100%',
+                                    height: '36px',
+                                    padding: '0 8px',
+                                    fontSize: '12px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    textDecoration: 'none',
+                                    borderRadius: '6px'
+                                }}
+                            >
+                                <span>Explore</span>
+                            </a>
+                        ) : (
+                            <>
+                                <a
+                                    href={event.formLink || '#'}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn-primary font-medium"
+                                    style={{
+                                        width: '100%',
+                                        height: '36px',
+                                        padding: '0 8px',
+                                        fontSize: '12px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        textDecoration: 'none',
+                                        borderRadius: '6px'
+                                    }}
+                                >
+                                    <span>Register</span>
+                                </a>
 
-                        <a
-                            href={`/events/${event.id}`}
-                            className="btn-secondary font-medium"
-                            style={{
-                                width: '100%',
-                                height: '36px',
-                                padding: '0 8px',
-                                fontSize: '12px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                textDecoration: 'none',
-                                borderRadius: '6px'
-                            }}
-                        >
-                            <span>See Details</span>
-                        </a>
+                                <a
+                                    href={`/events/${event.id}`}
+                                    className="btn-secondary font-medium"
+                                    style={{
+                                        width: '100%',
+                                        height: '36px',
+                                        padding: '0 8px',
+                                        fontSize: '12px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        textDecoration: 'none',
+                                        borderRadius: '6px'
+                                    }}
+                                >
+                                    <span>See Details</span>
+                                </a>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

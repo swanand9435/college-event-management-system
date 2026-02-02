@@ -370,6 +370,7 @@
         "parentEvent": "Stabila",
         "description": "A self-balancing robot contest workshop focused on hardware integration and PID control.",
         "poster": "/assets/posters/stabila.png",
+        "rulebook": "/assets/posters/Stabilia – Balancing Robot Challenge Rulebook.pdf",
         "formLink": "https://docs.google.com/forms/d/e/1FAIpQLSexCUPWc40HQodGk7aBKSOBvsLDhZVCwqvRGperx2SQztCF0w/viewform",
         "theme": [
             "Robotics & Balance Control"
@@ -408,5 +409,20 @@
         "coordinator": {},
         "eligibility": "Open to all students",
         "detailsAvailable": false
+    },
+    {
+        "id": "kalakruti",
+        "name": "Kalakruti",
+        "parentEvent": "Kalakruti",
+        "description": "The annual cultural festival of FAMT, celebrating art, creativity, and talent.",
+        "poster": "/assets/posters/kalakruti.png",
+        "formLink": "",
+        "theme": [],
+        "rules": [],
+        "prizeDetails": {},
+        "venueDate": {},
+        "coordinator": {},
+        "eligibility": "Open to all students",
+        "detailsAvailable": true
     }
 ]

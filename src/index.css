@@ -1119,20 +1119,34 @@ body {
   box-shadow: 0 4px 15px rgba(0, 245, 255, 0.2);
 }
 
+/* Badges Container */
+.event-detail-badges {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 640px) {
+  .event-detail-badges {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+}
+
 /* Eligibility Badge */
 .event-detail-eligibility {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: 2rem;
-  padding: 1rem 2rem;
+  padding: 0.875rem 1.75rem;
   background: rgba(0, 245, 255, 0.05);
   border: 1px solid rgba(0, 245, 255, 0.15);
   border-radius: 50px;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .eligibility-icon {
@@ -1142,6 +1156,48 @@ body {
 .eligibility-text {
   font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.8);
+}
+
+/* Free Entry Badge */
+.event-detail-free-entry {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(16, 185, 129, 0.1));
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 50px;
+  animation: pulse-glow 2s ease-in-out infinite alternate;
+}
+
+.event-detail-free-entry:hover {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.25), rgba(16, 185, 129, 0.2));
+  border-color: rgba(34, 197, 94, 0.5);
+  transform: scale(1.02);
+}
+
+.free-entry-icon {
+  font-size: 1.25rem;
+}
+
+.free-entry-text {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #22c55e;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 5px rgba(34, 197, 94, 0.2);
+  }
+
+  100% {
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+  }
 }
 
 /* Action Buttons */
