@@ -1,0 +1,825 @@
+/* =========================================
+   FAMT ARENA - LANDING PAGE
+   THEME: RED • BLACK • LIGHT GREY
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+.landing-page {
+    min-height: 100vh;
+    background: #f2f2f2;
+    color: #111111;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.landing-header {
+    width: 100%;
+    padding: 24px 5%;
+    background: linear-gradient(
+        135deg,
+        #111111 0%,
+        #3a0000 45%,
+        #c8102e 100%
+    );
+    color: white;
+    border-bottom: 5px solid #c8102e;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.famt-logo {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+}
+
+.logo-area h1 {
+    margin: 0;
+    color: white;
+    font-size: clamp(25px, 4vw, 48px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: 1px;
+}
+
+.logo-area p {
+    margin: 10px 0 0;
+    color: #e6e6e6;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+
+/* =========================================
+   COMMON SECTION
+========================================= */
+
+.landing-section {
+    padding: 40px 4%;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.section-heading span {
+    width: 6px;
+    height: 30px;
+    background: #c8102e;
+    border-radius: 5px;
+}
+
+.section-heading h2 {
+    margin: 0;
+    color: #111111;
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================
+   HIGHLIGHT IMAGE SLIDER
+========================================= */
+
+.highlight-slider-section {
+    width: 100%;
+    padding: 25px 2% 50px;
+}
+
+.highlight-slider {
+    position: relative;
+    width: 100%;
+    max-width: 1600px;
+    height: 380px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #111111;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.25);
+
+    border: 3px solid #c8102e;
+}
+
+.highlight-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.highlight-slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.highlight-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+
+/* =========================================
+   PREVIOUS / NEXT BUTTONS
+========================================= */
+
+.highlight-prev,
+.highlight-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+
+    width: 44px;
+    height: 44px;
+
+    border: 2px solid #f2f2f2;
+    border-radius: 50%;
+
+    background: rgba(17, 17, 17, 0.8);
+    color: #f2f2f2;
+
+    font-size: 28px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.highlight-prev {
+    left: 18px;
+}
+
+.highlight-next {
+    right: 18px;
+}
+
+.highlight-prev:hover,
+.highlight-next:hover {
+    background: #c8102e;
+    border-color: #f2f2f2;
+    color: white;
+    transform: translateY(-50%) scale(1.08);
+}
+
+
+/* =========================================
+   DOTS
+========================================= */
+
+.highlight-dots {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+
+    display: flex;
+    gap: 9px;
+}
+
+.highlight-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+
+    background: rgba(242, 242, 242, 0.7);
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.highlight-dot:hover {
+    background: #f2f2f2;
+}
+
+.highlight-dot.active {
+    width: 22px;
+    border-radius: 10px;
+    background: #c8102e;
+    transform: scale(1.05);
+}
+
+
+/* =========================================
+   THREE EVENT SECTIONS
+========================================= */
+
+.event-sections {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 10px 4% 50px;
+}
+
+.event-box {
+    min-height: 310px;
+    padding: 35px 28px;
+
+    border: 2px solid #111111;
+    border-radius: 16px;
+
+    text-decoration: none;
+    text-align: center;
+
+    color: #111111;
+    background: #e6e6e6;
+
+    box-shadow:
+        0 7px 20px rgba(0, 0, 0, 0.12);
+
+    transition: all 0.3s ease;
+}
+
+.event-box:hover {
+    transform: translateY(-8px);
+
+    border-color: #c8102e;
+    background: #f2f2f2;
+
+    box-shadow:
+        0 18px 40px rgba(120, 0, 0, 0.2);
+}
+
+
+/* EVENT ICON */
+
+.event-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background: #111111;
+    color: #f2f2f2;
+
+    font-size: 32px;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.event-box:hover .event-icon {
+    background: #c8102e;
+}
+
+
+/* EVENT TITLE */
+
+.event-box h2 {
+    margin-top: 22px;
+
+    color: #a00018;
+
+    font-size: 30px;
+    font-weight: 900;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* RED LINE */
+
+.red-line {
+    width: 50px;
+    height: 3px;
+
+    margin: 10px auto 18px;
+
+    background: #c8102e;
+
+    border-radius: 5px;
+}
+
+
+/* EVENT DESCRIPTION */
+
+.event-box p {
+    max-width: 300px;
+
+    margin: auto;
+
+    color: #333333;
+
+    line-height: 1.6;
+}
+
+
+/* EVENT BUTTON */
+
+.event-box button {
+    margin-top: 25px;
+
+    border: 2px solid #111111;
+    border-radius: 25px;
+
+    padding: 11px 23px;
+
+    background: #c8102e;
+    color: white;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.event-box:hover button {
+    background: #111111;
+    color: #f2f2f2;
+}
+
+
+/* =========================================
+   PEOPLE + UPDATES
+========================================= */
+
+.dashboard-section {
+    display: grid;
+
+    grid-template-columns: 2fr 1fr;
+
+    gap: 25px;
+
+    padding: 0 4% 50px;
+}
+
+.people-section,
+.updates-section {
+    border: 2px solid #111111;
+
+    border-radius: 16px;
+
+    padding: 25px;
+
+    background: #f2f2f2;
+
+    box-shadow:
+        0 7px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+/* PEOPLE BLOCK */
+
+.people-block + .people-block {
+    margin-top: 40px;
+}
+
+
+/* PEOPLE GRID */
+
+.people-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+
+/* PERSON CARD */
+
+.person-card {
+    border: 1px solid #111111;
+
+    border-radius: 12px;
+
+    padding: 10px;
+
+    text-align: center;
+
+    background: #e6e6e6;
+
+    transition: all 0.3s ease;
+}
+
+.person-card:hover {
+    transform: translateY(-5px);
+
+    border-color: #c8102e;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+
+/* PERSON IMAGE */
+
+.person-card img {
+    width: 100%;
+    height: 150px;
+
+    object-fit: cover;
+
+    border-radius: 9px;
+
+    border: 2px solid #111111;
+}
+
+
+/* PERSON NAME */
+
+.person-card h3 {
+    margin: 10px 0 3px;
+
+    color: #111111;
+
+    font-size: 15px;
+}
+
+
+/* PERSON ROLE */
+
+.person-card p {
+    margin: 0;
+
+    color: #c8102e;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   HIGHLIGHTS / UPDATES
+========================================= */
+
+.update-card {
+    border: 1px solid #111111;
+
+    border-radius: 12px;
+
+    padding: 17px;
+
+    margin-bottom: 15px;
+
+    background: #e6e6e6;
+
+    transition: all 0.3s ease;
+}
+
+.update-card:hover {
+    border-color: #c8102e;
+
+    transform: translateX(3px);
+}
+
+
+/* LIVE LABEL */
+
+.update-card span {
+    display: inline-block;
+
+    padding: 4px 9px;
+
+    background: #c8102e;
+
+    color: white;
+
+    border-radius: 4px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+
+/* UPDATE TITLE */
+
+.update-card h3 {
+    margin: 8px 0;
+
+    color: #111111;
+}
+
+
+/* UPDATE TEXT */
+
+.update-card p {
+    color: #333333;
+
+    line-height: 1.5;
+
+    font-size: 14px;
+}
+
+
+/* UPDATE DATE */
+
+.update-card small {
+    color: #555555;
+}
+
+
+/* VIEW UPDATES */
+
+.view-updates {
+    width: 100%;
+
+    padding: 11px;
+
+    border: 2px solid #c8102e;
+
+    background: #111111;
+
+    color: #f2f2f2;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.view-updates:hover {
+    background: #c8102e;
+
+    color: white;
+}
+
+
+/* =========================================
+   SOCIAL MEDIA
+========================================= */
+
+.social-section {
+    margin: 0 4% 45px;
+
+    padding: 25px;
+
+    border: 2px solid #111111;
+
+    border-radius: 16px;
+
+    background: #e6e6e6;
+
+    box-shadow:
+        0 7px 20px rgba(0, 0, 0, 0.1);
+}
+
+.social-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 30px;
+}
+
+.social-grid > div {
+    padding-left: 20px;
+
+    border-left: 3px solid #111111;
+}
+
+.social-grid > div:hover {
+    border-left-color: #c8102e;
+}
+
+.social-grid h3 {
+    color: #a00018;
+
+    margin-bottom: 12px;
+
+    font-weight: 900;
+}
+
+.social-grid a {
+    display: block;
+
+    margin: 8px 0;
+
+    color: #222222;
+
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+.social-grid a:hover {
+    color: #c8102e;
+
+    transform: translateX(4px);
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.landing-footer {
+    padding: 22px;
+
+    text-align: center;
+
+    background: #111111;
+
+    color: #f2f2f2;
+
+    border-top: 5px solid #c8102e;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   TABLET RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .event-sections {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-section {
+        grid-template-columns: 1fr;
+    }
+
+    .people-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .social-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    /* HEADER */
+
+    .landing-header {
+        padding: 20px 5%;
+    }
+
+    .logo-area {
+        gap: 15px;
+    }
+
+    .famt-logo {
+        width: 65px;
+        height: 65px;
+    }
+
+    .logo-area h1 {
+        font-size: 22px;
+    }
+
+    .logo-area p {
+        font-size: 11px;
+
+        margin-top: 6px;
+
+        letter-spacing: 1px;
+    }
+
+
+    /* HIGHLIGHTS */
+
+    .highlight-slider-section {
+        padding: 15px 2% 35px;
+    }
+
+    .highlight-slider {
+        height: 250px;
+
+        border-radius: 10px;
+
+        border-width: 2px;
+    }
+
+    .highlight-prev,
+    .highlight-next {
+        width: 34px;
+        height: 34px;
+
+        font-size: 22px;
+    }
+
+    .highlight-prev {
+        left: 10px;
+    }
+
+    .highlight-next {
+        right: 10px;
+    }
+
+    .highlight-dots {
+        bottom: 10px;
+    }
+
+
+    /* EVENT BOXES */
+
+    .event-sections {
+        padding: 10px 5% 40px;
+
+        gap: 18px;
+    }
+
+    .event-box {
+        min-height: 280px;
+
+        padding: 28px 20px;
+    }
+
+
+    /* PEOPLE */
+
+    .people-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    /* SOCIAL */
+
+    .social-section {
+        margin: 0 5% 35px;
+    }
+
+    .social-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .social-grid > div {
+        border-left: none;
+
+        border-bottom: 2px solid #111111;
+
+        padding: 15px 0;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 500px) {
+
+    .logo-area {
+        align-items: center;
+    }
+
+    .famt-logo {
+        width: 55px;
+        height: 55px;
+    }
+
+    .logo-area h1 {
+        font-size: 19px;
+    }
+
+    .logo-area p {
+        font-size: 10px;
+    }
+
+    .highlight-slider {
+        height: 210px;
+    }
+
+    .people-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-heading h2 {
+        font-size: 20px;
+    }
+}

@@ -13,11 +13,11 @@ export default function Footer() {
                     {/* Column 1 - Name & Tagline */}
                     <div className="text-center sm:text-left">
                         <Link to="/" className="inline-block mb-2">
-                            <span className="font-display font-bold text-xl text-white">BRAINWAVES</span>
-                            <span className="text-neon-cyan text-sm ml-2">2026</span>
+                            <span className="font-display font-bold text-xl text-white">FAMT</span>
+                            <span className="text-neon-cyan text-sm ml-2">ARENA</span>
                         </Link>
                         <p className="text-white/40 text-sm max-w-xs">
-                            The ultimate technical and cultural fest.
+                            The official event management platform of FAMT..
                         </p>
                     </div>
 

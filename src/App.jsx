@@ -1,7 +1,9 @@
+import Landing from './pages/Landing'
+import Cultural from './pages/Cultural'
+import Sports from './pages/Sports'
 import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Lenis from 'lenis'
-import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './pages/Home'
 import Events from './pages/Events'
@@ -52,12 +54,15 @@ export default function App() {
     <div className="min-h-screen bg-deep-black">
       <ScrollToTop />
 
-      {/* Only show navbar if not on admin page */}
-      {!isAdminPage && <Navbar />}
+      {/* Show navbar only on FAMT Arena landing page */}
+      
 
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Landing />} />
+          <Route path="/technical" element={<Home />} />
+          <Route path="/cultural" element={<Cultural />} />
+          <Route path="/sports" element={<Sports />} />
           <Route path="/events" element={<Events />} />
           <Route path="/events/:id" element={<EventDetail />} />
           <Route path="/gallery" element={<Gallery />} />
@@ -69,7 +74,7 @@ export default function App() {
       </main>
 
       {/* Only show footer if not on admin page */}
-      {!isAdminPage && <Footer />}
+      {location.pathname === '/' && <Footer />}
     </div>
   )
 }

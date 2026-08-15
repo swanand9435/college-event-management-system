@@ -67,7 +67,7 @@ export default function Navbar() {
                                 <span className="font-display font-bold text-deep-black text-lg">B</span>
                             </div>
                             <span className="font-display font-bold text-xl tracking-wider text-white group-hover:text-neon-cyan transition-colors">
-                                BRAINWAVES
+                                FAMT ARENA
                             </span>
                         </Link>
 
