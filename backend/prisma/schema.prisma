@@ -1,0 +1,563 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// =====================================================
+// DEPARTMENTS
+// =====================================================
+
+model Department {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  code      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  players       Player[]
+  entries       CompetitionEntry[]
+  standings     DepartmentStanding[]
+  registrations MatchRegistration[]
+}
+
+// =====================================================
+// SPORTS
+// =====================================================
+
+model Sport {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  icon        String?
+  type        String
+  description String?
+  venue       String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  categories SportCategory[]
+  matches    Match[]
+  highlights Highlight[]
+  awards     Award[]
+}
+
+// =====================================================
+// SPORT CATEGORIES / EVENTS
+// Example:
+// Football -> Boys Team
+// Football -> Girls Team
+// Badminton -> Boys Singles
+// Badminton -> Girls Singles
+// Badminton -> Boys Doubles
+// Badminton -> Mixed Doubles
+// =====================================================
+
+model SportCategory {
+  id          Int               @id @default(autoincrement())
+  sportId     Int
+  name        String
+  description String?
+  format      CompetitionFormat @default(KNOCKOUT)
+  entryType   EntryType         @default(SINGLE)
+  isActive    Boolean           @default(true)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  sport        Sport               @relation(fields: [sportId], references: [id])
+  pointSchemes PointScheme[]
+  entries      CompetitionEntry[]
+  draws        Draw[]
+  matches      Match[]
+  results      CompetitionResult[]
+
+  @@unique([sportId, name])
+  @@index([sportId])
+}
+
+// =====================================================
+// YEAR-WISE POINT SCHEME
+// Example:
+// 2026-27 Football Boys Team
+// Gold = 25
+// Silver = 15
+// Bronze = configurable
+// =====================================================
+
+model PointScheme {
+  id           Int      @id @default(autoincrement())
+  categoryId   Int
+  year         String
+  goldPoints   Int?
+  silverPoints Int?
+  bronzePoints Int?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  category SportCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, year])
+  @@index([year])
+}
+
+// =====================================================
+// PLAYERS
+// =====================================================
+
+model Player {
+  id           Int      @id @default(autoincrement())
+  name         String
+  year         String
+  mobile       String   @unique
+  email        String   @unique
+  departmentId Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  department Department @relation(fields: [departmentId], references: [id])
+
+  entries      CompetitionEntry[]  @relation("EntryCaptain")
+  entryPlayers EntryPlayer[]
+  captainOf    MatchRegistration[] @relation("Captain")
+  performance  PlayerPerformance[]
+  awards       Award[]
+
+  @@index([departmentId])
+}
+
+// =====================================================
+// COMPETITION ENTRY
+//
+// SINGLE -> one player
+// PAIR   -> two players
+// TEAM   -> multiple players
+//
+// Department is attached to the complete entry.
+//
+// IMPORTANT DRAW RULE:
+// Different departments can be paired.
+// Same department CAN also be paired.
+// The draw algorithm will prefer different departments
+// when possible, but will NOT make it impossible.
+// =====================================================
+
+model CompetitionEntry {
+  id           Int       @id @default(autoincrement())
+  categoryId   Int
+  departmentId Int
+  name         String
+  entryType    EntryType
+  captainId    Int?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  category   SportCategory @relation(fields: [categoryId], references: [id])
+  department Department    @relation(fields: [departmentId], references: [id])
+
+  captain Player? @relation("EntryCaptain", fields: [captainId], references: [id])
+
+  players EntryPlayer[]
+
+  drawSlots DrawSlot[]
+
+  matchesAsA Match[] @relation("MatchEntryA")
+  matchesAsB Match[] @relation("MatchEntryB")
+  wins       Match[] @relation("MatchWinner")
+
+  results CompetitionResult[]
+
+  @@index([categoryId])
+  @@index([departmentId])
+}
+
+// =====================================================
+// PLAYERS INSIDE AN ENTRY
+//
+// SINGLE:
+// one player
+//
+// PAIR:
+// two players
+//
+// TEAM:
+// multiple players
+// =====================================================
+
+model EntryPlayer {
+  id       Int @id @default(autoincrement())
+  entryId  Int
+  playerId Int
+
+  entry  CompetitionEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  player Player           @relation(fields: [playerId], references: [id])
+
+  @@unique([entryId, playerId])
+  @@index([playerId])
+}
+
+// =====================================================
+// DRAW
+//
+// One draw belongs to one sport category.
+//
+// Example:
+// Carrom Boys Singles
+// 60 participants
+// Knockout Draw
+// =====================================================
+
+model Draw {
+  id          Int        @id @default(autoincrement())
+  categoryId  Int
+  name        String
+  format      DrawFormat @default(KNOCKOUT)
+  status      DrawStatus @default(DRAFT)
+  generatedAt DateTime?
+  lockedAt    DateTime?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  category SportCategory @relation(fields: [categoryId], references: [id])
+
+  rounds DrawRound[]
+  slots  DrawSlot[]
+
+  @@index([categoryId])
+}
+
+// =====================================================
+// DRAW ROUND
+//
+// Example:
+//
+// Round 1
+// Round 2
+// Quarter Final
+// Semi Final
+// Final
+// =====================================================
+
+model DrawRound {
+  id        Int      @id @default(autoincrement())
+  drawId    Int
+  roundNo   Int
+  name      String
+  createdAt DateTime @default(now())
+
+  draw    Draw    @relation(fields: [drawId], references: [id], onDelete: Cascade)
+  matches Match[]
+
+  @@unique([drawId, roundNo])
+}
+
+// =====================================================
+// DRAW SLOT
+//
+// Stores the position of an entry in the bracket.
+//
+// Example:
+//
+// Slot 1 -> Player A
+// Slot 2 -> Player B
+// Slot 3 -> Player C
+// Slot 4 -> BYE
+// =====================================================
+
+model DrawSlot {
+  id         Int     @id @default(autoincrement())
+  drawId     Int
+  entryId    Int?
+  slotNumber Int
+  isBye      Boolean @default(false)
+
+  draw  Draw              @relation(fields: [drawId], references: [id], onDelete: Cascade)
+  entry CompetitionEntry? @relation(fields: [entryId], references: [id])
+
+  @@unique([drawId, slotNumber])
+  @@index([entryId])
+}
+
+// =====================================================
+// MATCH
+//
+// Every actual match is stored separately.
+//
+// Supports:
+// - Singles
+// - Doubles
+// - Mixed Doubles
+// - Team events
+// - Knockout rounds
+// - BYEs
+// - Admin modifications
+// =====================================================
+
+model Match {
+  id               Int         @id @default(autoincrement())
+  sportId          Int
+  categoryId       Int
+  roundId          Int?
+  matchNumber      String?
+  scheduledAt      DateTime?
+  registrationEnds DateTime?
+  venue            String?
+  status           MatchStatus @default(UPCOMING)
+
+  entryAId Int?
+  entryBId Int?
+
+  // True when one participant automatically
+  // advances without playing a match.
+  isBye Boolean @default(false)
+
+  // Winner of this match.
+  winnerEntryId Int?
+
+  // Used to automatically advance the winner
+  // into the next round.
+  nextMatchId Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sport    Sport         @relation(fields: [sportId], references: [id])
+  category SportCategory @relation(fields: [categoryId], references: [id])
+
+  round DrawRound? @relation(fields: [roundId], references: [id])
+
+  entryA CompetitionEntry? @relation("MatchEntryA", fields: [entryAId], references: [id])
+  entryB CompetitionEntry? @relation("MatchEntryB", fields: [entryBId], references: [id])
+
+  winnerEntry CompetitionEntry? @relation("MatchWinner", fields: [winnerEntryId], references: [id])
+
+  nextMatch       Match?  @relation("MatchAdvancement", fields: [nextMatchId], references: [id])
+  previousMatches Match[] @relation("MatchAdvancement")
+
+  score MatchScore?
+
+  registration MatchRegistration[]
+
+  @@index([categoryId])
+  @@index([roundId])
+  @@index([entryAId])
+  @@index([entryBId])
+  @@index([winnerEntryId])
+}
+
+// =====================================================
+// MATCH SCORE
+// =====================================================
+
+model MatchScore {
+  id         Int      @id @default(autoincrement())
+  matchId    Int      @unique
+  scoreA     String?
+  scoreB     String?
+  detail     String?
+  winnerTeam String?
+  updatedAt  DateTime @updatedAt
+
+  match Match @relation(fields: [matchId], references: [id], onDelete: Cascade)
+}
+
+// =====================================================
+// COMPETITION RESULT
+//
+// This is the official declared result.
+//
+// Example:
+//
+// Carrom Boys Singles
+//
+// 1st -> Player A -> Gold -> 5 points
+// 2nd -> Player B -> Silver -> 3 points
+// 3rd -> Player C -> Bronze -> 1 point
+//
+// The result is what ultimately affects
+// the department point table.
+// =====================================================
+
+model CompetitionResult {
+  id            Int      @id @default(autoincrement())
+  categoryId    Int
+  entryId       Int
+  position      Int
+  medal         Medal?
+  pointsAwarded Int?
+  year          String
+  declaredAt    DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  category SportCategory    @relation(fields: [categoryId], references: [id])
+  entry    CompetitionEntry @relation(fields: [entryId], references: [id])
+
+  @@unique([categoryId, entryId, year])
+  @@unique([categoryId, position, year])
+  @@index([year])
+}
+
+// =====================================================
+// PLAYER PERFORMANCE
+// =====================================================
+
+model PlayerPerformance {
+  id        Int      @id @default(autoincrement())
+  playerId  Int
+  matchId   Int?
+  points    Int      @default(0)
+  goals     Int      @default(0)
+  assists   Int      @default(0)
+  gold      Int      @default(0)
+  silver    Int      @default(0)
+  bronze    Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+}
+
+// =====================================================
+// DEPARTMENT POINT TABLE
+//
+// Updated automatically when official results
+// are declared or corrected.
+// =====================================================
+
+model DepartmentStanding {
+  id           Int      @id @default(autoincrement())
+  departmentId Int      @unique
+  gold         Int      @default(0)
+  silver       Int      @default(0)
+  bronze       Int      @default(0)
+  points       Int      @default(0)
+  updatedAt    DateTime @updatedAt
+
+  department Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+}
+
+// =====================================================
+// MATCH REGISTRATION
+//
+// Kept for the existing registration system.
+//
+// Captain registers for a particular match.
+// =====================================================
+
+model MatchRegistration {
+  id           Int                @id @default(autoincrement())
+  matchId      Int
+  captainId    Int
+  departmentId Int
+  registeredAt DateTime           @default(now())
+  status       RegistrationStatus @default(PENDING)
+
+  captain    Player     @relation("Captain", fields: [captainId], references: [id])
+  department Department @relation(fields: [departmentId], references: [id])
+  match      Match      @relation(fields: [matchId], references: [id])
+
+  @@unique([matchId, captainId])
+  @@index([departmentId])
+}
+
+// =====================================================
+// HIGHLIGHTS
+// =====================================================
+
+model Highlight {
+  id        Int      @id @default(autoincrement())
+  sportId   Int?
+  title     String
+  image     String
+  createdAt DateTime @default(now())
+
+  sport Sport? @relation(fields: [sportId], references: [id])
+}
+
+// =====================================================
+// AWARDS
+//
+// Used for:
+// Best Athlete
+// Best Sportsperson Boys
+// Best Sportsperson Girls
+// =====================================================
+
+model Award {
+  id        Int      @id @default(autoincrement())
+  sportId   Int?
+  playerId  Int?
+  title     String
+  points    Int?
+  year      String?
+  createdAt DateTime @default(now())
+
+  sport  Sport?  @relation(fields: [sportId], references: [id])
+  player Player? @relation(fields: [playerId], references: [id])
+}
+
+// =====================================================
+// SPORTS COMMITTEE
+// =====================================================
+
+model CommitteeMember {
+  id        Int      @id @default(autoincrement())
+  name      String
+  role      String
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// =====================================================
+// ENUMS
+// =====================================================
+
+enum MatchStatus {
+  UPCOMING
+  REGISTRATION_OPEN
+  REGISTRATION_CLOSED
+  LIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum RegistrationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+enum EntryType {
+  SINGLE
+  PAIR
+  TEAM
+}
+
+enum CompetitionFormat {
+  KNOCKOUT
+  ROUND_ROBIN
+  HEAT
+  DIRECT_FINAL
+}
+
+enum DrawFormat {
+  KNOCKOUT
+  ROUND_ROBIN
+  HEAT
+}
+
+enum DrawStatus {
+  DRAFT
+  GENERATED
+  LOCKED
+  COMPLETED
+}
+
+enum Medal {
+  GOLD
+  SILVER
+  BRONZE
+}

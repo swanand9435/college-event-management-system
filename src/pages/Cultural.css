@@ -1,0 +1,1245 @@
+/* =========================================================
+   UTOPIA CULTURAL PAGE
+   HERO = EXISTING DESIGN
+   BELOW HERO = FAMT ARENA NAVY + WHITE THEME
+   ========================================================= */
+
+.utopia-page {
+  min-height: 100vh;
+  background: #0b1f33;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.utopia-navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.utopia-nav-inner {
+  max-width: 1350px;
+  margin: auto;
+  padding: 22px 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.utopia-brand {
+  text-decoration: none;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.utopia-brand-main {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.utopia-brand-sub {
+  color: #ffffff;
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  font-weight: 700;
+}
+
+.utopia-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.utopia-nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  opacity: 0.8;
+
+  transition: 0.3s ease;
+}
+
+.utopia-nav-links a:hover {
+  opacity: 1;
+  color: #ffffff;
+}
+
+.utopia-nav-links .utopia-nav-button {
+  opacity: 1;
+
+  padding: 11px 19px;
+
+  border: 1px solid #ffffff;
+
+  color: #ffffff;
+}
+
+.utopia-nav-button:hover {
+  background: #ffffff;
+  color: #0b1f33 !important;
+}
+
+
+/* =========================================================
+   HERO
+   KEEPING HERO DESIGN / COLOUR EXACTLY AS CURRENT
+   ========================================================= */
+
+.utopia-hero {
+  min-height: 100vh;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  background:
+    radial-gradient(
+      circle at 75% 45%,
+      rgba(181, 30, 42, 0.30),
+      transparent 30%
+    ),
+    linear-gradient(
+      120deg,
+      #050508 0%,
+      #0a0a0f 48%,
+      #3a090d 100%
+    );
+
+  overflow: hidden;
+}
+
+.utopia-hero::before {
+  content: "UTOPIA";
+
+  position: absolute;
+
+  right: -90px;
+  bottom: -70px;
+
+  font-size: clamp(12rem, 28vw, 32rem);
+
+  font-weight: 900;
+  line-height: 0.8;
+
+  color: rgba(255, 255, 255, 0.035);
+
+  pointer-events: none;
+}
+
+.utopia-hero-content {
+  width: 100%;
+  max-width: 1350px;
+
+  margin: auto;
+
+  padding: 150px 40px 120px;
+
+  position: relative;
+  z-index: 3;
+}
+
+.utopia-overline {
+  display: block;
+
+  color: #f4c430;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+
+  letter-spacing: 4px;
+
+  margin-bottom: 25px;
+}
+
+.utopia-hero h1 {
+  margin: 0;
+
+  font-size: clamp(6rem, 15vw, 13rem);
+
+  line-height: 0.8;
+
+  font-weight: 900;
+
+  letter-spacing: -8px;
+
+  color: #fffdf5;
+}
+
+.utopia-line {
+  width: 100px;
+  height: 4px;
+
+  margin: 35px 0 22px;
+
+  background: #f4c430;
+}
+
+.utopia-tagline {
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+
+  font-weight: 600;
+
+  margin: 0 0 15px;
+
+  color: #fffdf5;
+}
+
+.utopia-description {
+  max-width: 570px;
+
+  color: #ffe49a;
+
+  opacity: 0.8;
+
+  line-height: 1.8;
+
+  font-size: 1rem;
+}
+
+.utopia-hero-actions {
+  margin-top: 35px;
+
+  display: flex;
+
+  gap: 15px;
+
+  flex-wrap: wrap;
+}
+
+.utopia-primary-button,
+.utopia-secondary-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 20px;
+
+  padding: 15px 24px;
+
+  text-decoration: none;
+
+  text-transform: uppercase;
+
+  font-size: 0.75rem;
+
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+
+  transition: 0.3s ease;
+}
+
+.utopia-primary-button {
+  background: #f4c430;
+  color: #0a0a0f;
+}
+
+.utopia-primary-button:hover {
+  background: #ffe49a;
+
+  transform: translateY(-3px);
+}
+
+.utopia-secondary-button {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+
+  color: #ffffff;
+
+  background: transparent;
+}
+
+.utopia-secondary-button:hover {
+  border-color: #ffffff;
+
+  color: #ffffff;
+}
+
+.utopia-hero-bottom {
+  position: absolute;
+
+  left: 40px;
+  bottom: 35px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  color: #ffe49a;
+
+  font-size: 0.65rem;
+
+  letter-spacing: 2px;
+
+  z-index: 5;
+}
+
+.hero-scroll-line {
+  width: 55px;
+  height: 1px;
+
+  background: #f4c430;
+}
+
+.utopia-hero-glow {
+  position: absolute;
+
+  border-radius: 50%;
+
+  filter: blur(80px);
+
+  pointer-events: none;
+}
+
+.glow-one {
+  width: 400px;
+  height: 400px;
+
+  right: 5%;
+  top: 25%;
+
+  background: rgba(244, 196, 48, 0.06);
+}
+
+.glow-two {
+  width: 300px;
+  height: 300px;
+
+  right: 25%;
+  bottom: 10%;
+
+  background: rgba(181, 30, 42, 0.28);
+}
+
+
+/* =========================================================
+   COMMON SECTION LABEL
+   ========================================================= */
+
+.utopia-section-label {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  color: #ffffff;
+
+  font-size: 0.68rem;
+
+  font-weight: 800;
+
+  letter-spacing: 3px;
+}
+
+.utopia-section-label span:first-child {
+  opacity: 0.45;
+}
+
+
+/* =========================================================
+   ABOUT UTOPIA
+   NAVY + WHITE
+   ========================================================= */
+
+.utopia-about {
+  padding: 120px 40px;
+
+  background: #ffffff;
+
+  color: #0b1f33;
+}
+
+.utopia-about > .utopia-section-label {
+  max-width: 1350px;
+
+  margin: auto;
+
+  color: #123b5d;
+}
+
+.utopia-about-grid {
+  max-width: 1350px;
+
+  margin: 70px auto 0;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 100px;
+}
+
+.utopia-about-title h2 {
+  margin: 0;
+
+  font-size: clamp(3.5rem, 7vw, 7rem);
+
+  line-height: 0.9;
+
+  letter-spacing: -4px;
+
+  color: #0b1f33;
+}
+
+.utopia-about-title h2 span {
+  color: #123b5d;
+}
+
+.utopia-about-text {
+  padding-top: 15px;
+}
+
+.utopia-about-text p {
+  font-size: 1.05rem;
+
+  line-height: 1.8;
+
+  color: #64748b;
+
+  max-width: 600px;
+}
+
+.utopia-stats {
+  display: flex;
+
+  gap: 60px;
+
+  margin-top: 55px;
+
+  border-top: 1px solid rgba(11, 31, 51, 0.15);
+
+  padding-top: 30px;
+}
+
+.utopia-stats div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.utopia-stats strong {
+  font-size: 2.6rem;
+
+  color: #123b5d;
+}
+
+.utopia-stats span {
+  color: #64748b;
+
+  font-size: 0.7rem;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   COMMITTEES
+   NAVY + WHITE
+   ========================================================= */
+
+.utopia-committees {
+  padding: 120px 40px;
+
+  background: #0b1f33;
+
+  color: #ffffff;
+}
+
+.utopia-section-heading {
+  max-width: 1350px;
+
+  margin: auto;
+}
+
+.utopia-section-heading h2 {
+  margin: 25px 0 10px;
+
+  font-size: clamp(3.5rem, 7vw, 7rem);
+
+  line-height: 0.9;
+
+  letter-spacing: -4px;
+
+  color: #ffffff;
+}
+
+.utopia-section-heading p {
+  max-width: 550px;
+
+  color: #d9e3eb;
+
+  opacity: 0.75;
+
+  line-height: 1.7;
+}
+
+.utopia-committee-grid {
+  max-width: 1350px;
+
+  margin: 70px auto 0;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 1px;
+
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.utopia-committee-card {
+  min-height: 220px;
+
+  padding: 25px;
+
+  position: relative;
+
+  background: #123b5d;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  transition: 0.3s ease;
+}
+
+.utopia-committee-card:hover {
+  background: #1c527d;
+
+  transform: translateY(-5px);
+
+  z-index: 2;
+}
+
+.committee-number {
+  color: #ffffff;
+
+  font-size: 0.65rem;
+
+  letter-spacing: 2px;
+}
+
+.committee-icon {
+  font-size: 2.2rem;
+}
+
+.committee-info span {
+  color: #d9e3eb;
+
+  font-size: 0.6rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: 2px;
+}
+
+.committee-info h3 {
+  margin: 7px 0 0;
+
+  font-size: 1.25rem;
+
+  color: #ffffff;
+}
+
+.committee-arrow {
+  position: absolute;
+
+  right: 22px;
+  bottom: 22px;
+
+  color: #ffffff;
+
+  font-size: 1.3rem;
+
+  transition: 0.3s ease;
+}
+
+.utopia-committee-card:hover .committee-arrow {
+  transform: translate(5px, -5px);
+}
+
+
+/* =========================================================
+   AUDITIONS
+   NAVY + WHITE
+   ========================================================= */
+
+.utopia-auditions {
+  position: relative;
+
+  min-height: 600px;
+
+  padding: 120px 40px;
+
+  background:
+    radial-gradient(
+      circle at 80% 50%,
+      rgba(255, 255, 255, 0.07),
+      transparent 30%
+    ),
+    #123b5d;
+
+  overflow: hidden;
+}
+
+.audition-content {
+  max-width: 1350px;
+
+  margin: auto;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+.audition-content h2 {
+  margin: 50px 0 25px;
+
+  font-size: clamp(3.5rem, 8vw, 8rem);
+
+  line-height: 0.85;
+
+  letter-spacing: -5px;
+
+  color: #ffffff;
+}
+
+.audition-content h2 span {
+  color: #ffffff;
+}
+
+.audition-content p {
+  max-width: 550px;
+
+  color: #d9e3eb;
+
+  opacity: 0.8;
+
+  line-height: 1.8;
+}
+
+.utopia-outline-button {
+  display: inline-block;
+
+  margin-top: 30px;
+
+  padding: 15px 25px;
+
+  border: 1px solid #ffffff;
+
+  background: transparent;
+
+  color: #ffffff;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.utopia-outline-button:hover {
+  background: #ffffff;
+
+  color: #0b1f33;
+}
+
+.audition-mark {
+  position: absolute;
+
+  right: -100px;
+  top: 50%;
+
+  transform: translateY(-50%) rotate(-90deg);
+
+  font-size: clamp(8rem, 20vw, 20rem);
+
+  font-weight: 900;
+
+  color: rgba(255, 255, 255, 0.035);
+}
+
+
+/* =========================================================
+   RESULTS
+   NAVY + WHITE
+   ========================================================= */
+
+.utopia-results {
+  padding: 120px 40px;
+
+  background: #ffffff;
+
+  color: #0b1f33;
+}
+
+.utopia-results > .utopia-section-label {
+  color: #123b5d;
+}
+
+.results-heading {
+  max-width: 1350px;
+
+  margin: 60px auto;
+}
+
+.results-heading h2 {
+  margin: 0;
+
+  font-size: clamp(3.5rem, 8vw, 8rem);
+
+  line-height: 0.85;
+
+  letter-spacing: -5px;
+
+  color: #0b1f33;
+}
+
+.results-heading h2 span {
+  color: #123b5d;
+}
+
+.results-heading p {
+  max-width: 500px;
+
+  margin-top: 30px;
+
+  color: #64748b;
+
+  opacity: 0.85;
+}
+
+.results-placeholder {
+  max-width: 1350px;
+
+  margin: auto;
+
+  min-height: 250px;
+
+  border: 1px solid rgba(11, 31, 51, 0.2);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.results-placeholder span {
+  font-size: 0.7rem;
+
+  letter-spacing: 3px;
+
+  color: #64748b;
+}
+
+.results-placeholder strong {
+  font-size: 2rem;
+
+  color: #123b5d;
+}
+
+
+/* =========================================================
+   GALLERY
+   NAVY + WHITE
+   ========================================================= */
+
+.utopia-gallery {
+  padding: 120px 40px;
+
+  background: #0b1f33;
+
+  color: #ffffff;
+}
+
+.utopia-gallery > .utopia-section-label {
+  color: #ffffff;
+}
+
+.gallery-heading {
+  max-width: 1350px;
+
+  margin: 60px auto;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 40px;
+}
+
+.gallery-heading h2 {
+  margin: 0;
+
+  font-size: clamp(3.5rem, 7vw, 7rem);
+
+  line-height: 0.9;
+
+  letter-spacing: -4px;
+
+  color: #ffffff;
+}
+
+.gallery-heading h2 span {
+  color: #ffffff;
+}
+
+.gallery-link {
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  font-size: 0.7rem;
+
+  letter-spacing: 2px;
+}
+
+.gallery-link:hover {
+  opacity: 0.7;
+}
+
+.gallery-grid {
+  max-width: 1350px;
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns: 2fr 1fr 1fr;
+
+  grid-template-rows: 250px 250px;
+
+  gap: 10px;
+}
+
+.gallery-box {
+  background:
+    linear-gradient(
+      135deg,
+      #1c527d,
+      #0b1f33
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+.gallery-large {
+  grid-row: span 2;
+}
+
+.gallery-box::before {
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  filter: blur(30px);
+}
+
+.gallery-box span {
+  position: relative;
+
+  color: rgba(255, 255, 255, 0.25);
+
+  font-size: 2rem;
+
+  font-weight: 900;
+
+  letter-spacing: 4px;
+}
+
+.gallery-box strong {
+  position: absolute;
+
+  right: 15px;
+  top: 15px;
+
+  color: #ffffff;
+
+  font-size: 0.7rem;
+}
+
+
+/* =========================================================
+   FINAL CTA
+   NAVY + WHITE
+   ========================================================= */
+
+.utopia-final-cta {
+  min-height: 650px;
+
+  padding: 100px 40px;
+
+  background: #123b5d;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+}
+
+.utopia-final-cta > span {
+  color: #d9e3eb;
+
+  font-size: 0.7rem;
+
+  letter-spacing: 3px;
+}
+
+.utopia-final-cta h2 {
+  margin: 35px 0;
+
+  font-size: clamp(5rem, 13vw, 13rem);
+
+  line-height: 0.78;
+
+  letter-spacing: -8px;
+
+  color: #ffffff;
+}
+
+.utopia-final-cta .utopia-primary-button {
+  background: #ffffff;
+
+  color: #0b1f33;
+}
+
+.utopia-final-cta .utopia-primary-button:hover {
+  background: #f5f8fa;
+
+  color: #0b1f33;
+}
+
+
+/* =========================================================
+   FOOTER
+   NAVY + WHITE
+   ========================================================= */
+
+.utopia-footer {
+  padding: 60px 40px 25px;
+
+  background: #061522;
+
+  color: #ffffff;
+}
+
+.utopia-footer-top {
+  max-width: 1350px;
+
+  margin: auto;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 40px;
+}
+
+.footer-brand {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.footer-brand-title {
+  font-size: 1.5rem;
+
+  font-weight: 900;
+
+  letter-spacing: 2px;
+}
+
+.footer-brand span:last-child {
+  font-size: 0.6rem;
+
+  color: #d9e3eb;
+
+  letter-spacing: 2px;
+}
+
+.footer-utopia {
+  color: #ffffff;
+
+  font-size: 5rem;
+
+  font-weight: 900;
+
+  line-height: 0.8;
+}
+
+.utopia-footer-bottom {
+  max-width: 1350px;
+
+  margin: 70px auto 0;
+
+  padding-top: 20px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+
+  display: flex;
+
+  justify-content: space-between;
+
+  color: #d9e3eb;
+
+  font-size: 0.65rem;
+
+  letter-spacing: 1px;
+}
+
+.utopia-footer-bottom a {
+  color: #ffffff;
+
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .utopia-nav-inner {
+    padding: 20px 25px;
+  }
+
+  .utopia-nav-links {
+    gap: 15px;
+  }
+
+  .utopia-nav-links a:not(.utopia-nav-button) {
+    display: none;
+  }
+
+  .utopia-hero-content {
+    padding: 140px 25px 100px;
+  }
+
+  .utopia-hero-bottom {
+    left: 25px;
+  }
+
+  .utopia-about,
+  .utopia-committees,
+  .utopia-auditions,
+  .utopia-results,
+  .utopia-gallery {
+    padding-left: 25px;
+
+    padding-right: 25px;
+  }
+
+  .utopia-about-grid {
+    grid-template-columns: 1fr;
+
+    gap: 40px;
+  }
+
+  .utopia-committee-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+
+    grid-template-rows: 250px 250px 250px;
+  }
+
+  .gallery-large {
+    grid-row: span 1;
+
+    grid-column: span 2;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .utopia-brand-main {
+    font-size: 1.2rem;
+  }
+
+  .utopia-brand-sub {
+    font-size: 0.6rem;
+  }
+
+  .utopia-nav-button {
+    padding: 9px 13px !important;
+  }
+
+  .utopia-hero h1 {
+    font-size: 5.5rem;
+
+    letter-spacing: -5px;
+  }
+
+  .utopia-tagline {
+    font-size: 1.25rem;
+  }
+
+  .utopia-description {
+    font-size: 0.9rem;
+  }
+
+  .utopia-about,
+  .utopia-committees,
+  .utopia-auditions,
+  .utopia-results,
+  .utopia-gallery {
+    padding-top: 80px;
+
+    padding-bottom: 80px;
+  }
+
+  .utopia-about-grid {
+    margin-top: 45px;
+  }
+
+  .utopia-about-title h2,
+  .utopia-section-heading h2,
+  .results-heading h2,
+  .gallery-heading h2 {
+    letter-spacing: -2px;
+  }
+
+  .utopia-stats {
+    gap: 25px;
+  }
+
+  .utopia-stats strong {
+    font-size: 2rem;
+  }
+
+  .utopia-committee-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .utopia-committee-card {
+    min-height: 190px;
+  }
+
+  .gallery-heading {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+
+    grid-template-rows: repeat(4, 220px);
+  }
+
+  .gallery-large {
+    grid-column: auto;
+  }
+
+  .utopia-final-cta {
+    min-height: 500px;
+
+    padding: 80px 25px;
+  }
+
+  .utopia-final-cta h2 {
+    font-size: 5rem;
+
+    letter-spacing: -5px;
+  }
+
+  .utopia-footer {
+    padding-left: 25px;
+
+    padding-right: 25px;
+  }
+
+  .utopia-footer-top {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .footer-utopia {
+    font-size: 3.5rem;
+  }
+
+  .utopia-footer-bottom {
+    flex-direction: column;
+
+    gap: 15px;
+  }
+}

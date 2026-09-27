@@ -1,825 +1,764 @@
-/* =========================================
+/* =========================================================
    FAMT ARENA - LANDING PAGE
-   THEME: RED • BLACK • LIGHT GREY
-========================================= */
+   ========================================================= */
+
+:root {
+  /* Primary Deep Tones */
+  --navy-dark: #0b192c;
+  --navy: #1e3e62;
+  --navy-light: #2563eb;
+
+  /* Background & Surface Accents */
+  --light-navy: #f1f5f9;
+  --light-navy-dark: #e2e8f0;
+
+  /* Base Light */
+  --white: #ffffff;
+
+  /* Typography & Details */
+  --text: #1e293b;
+  --muted: #64748b;
+
+  /* Neutral Border */
+  --border: #e2e8f0;
+
+  --max-width: 1350px;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: auto;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--white);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  scrollbar-width: auto;
+}
+
+
+/* =========================================================
+   LANDING PAGE
+   ========================================================= */
 
 .landing-page {
-    min-height: 100vh;
-    background: #f2f2f2;
-    color: #111111;
-    font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--white);
+  color: var(--text);
+}
+
+.landing-page *,
+.landing-page *::before,
+.landing-page *::after {
+  box-sizing: border-box;
+}
+
+.landing-page a {
+  text-decoration: none;
 }
 
 
-/* =========================================
-   HEADER
-========================================= */
+/* =========================================================
+   NAVBAR
+   ========================================================= */
 
-.landing-header {
-    width: 100%;
-    padding: 24px 5%;
-    background: linear-gradient(
-        135deg,
-        #111111 0%,
-        #3a0000 45%,
-        #c8102e 100%
-    );
-    color: white;
-    border-bottom: 5px solid #c8102e;
+.arena-navbar {
+  width: 100%;
+  height: 100px;
+  position: relative;
+  z-index: 50;
+  background: var(--navy-dark);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.logo-area {
-    display: flex;
-    align-items: center;
-    gap: 25px;
+.navbar-inner {
+  width: min(calc(100% - 40px), var(--max-width));
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.arena-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 .famt-logo {
-    width: 90px;
-    height: 90px;
-    object-fit: contain;
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
 }
 
-.logo-area h1 {
-    margin: 0;
-    color: white;
-    font-size: clamp(25px, 4vw, 48px);
-    font-weight: 900;
-    line-height: 1.05;
-    letter-spacing: 1px;
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
-.logo-area p {
-    margin: 10px 0 0;
-    color: #e6e6e6;
-    font-size: 17px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
+.brand-title {
+  color: var(--white);
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.brand-tagline {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+}
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 38px;
+}
+
+.desktop-nav a {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: 0.25s ease;
+}
+
+.desktop-nav a:hover {
+  color: var(--white);
+}
+
+.mobile-menu-button {
+  display: none;
+  background: transparent;
+  border: 0;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
 }
 
 
-/* =========================================
-   COMMON SECTION
-========================================= */
+/* =========================================================
+   HIGHLIGHTS
+   ========================================================= */
 
-.landing-section {
-    padding: 40px 4%;
-}
-
-.section-heading {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 25px;
-}
-
-.section-heading span {
-    width: 6px;
-    height: 30px;
-    background: #c8102e;
-    border-radius: 5px;
-}
-
-.section-heading h2 {
-    margin: 0;
-    color: #111111;
-    font-size: 24px;
-    font-weight: 900;
-    letter-spacing: 0.5px;
-}
-
-
-/* =========================================
-   HIGHLIGHT IMAGE SLIDER
-========================================= */
-
-.highlight-slider-section {
-    width: 100%;
-    padding: 25px 2% 50px;
-}
-
-.highlight-slider {
-    position: relative;
-    width: 100%;
-    max-width: 1600px;
-    height: 380px;
-    margin: auto;
-    overflow: hidden;
-    border-radius: 14px;
-    background: #111111;
-
-    box-shadow:
-        0 12px 35px rgba(0, 0, 0, 0.25);
-
-    border: 3px solid #c8102e;
+.highlights {
+  width: 100%;
+  height: calc(100vh - 100px);
+  min-height: 600px;
+  position: relative;
+  overflow: hidden;
+  background: var(--navy-dark);
 }
 
 .highlight-slide {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 0.8s ease;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.8s ease,
+    visibility 0.8s ease;
 }
 
 .highlight-slide.active {
-    opacity: 1;
-    z-index: 1;
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
 }
 
 .highlight-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transform: scale(1.02);
+  transition: transform 6s ease;
 }
 
-
-/* =========================================
-   PREVIOUS / NEXT BUTTONS
-========================================= */
-
-.highlight-prev,
-.highlight-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 5;
-
-    width: 44px;
-    height: 44px;
-
-    border: 2px solid #f2f2f2;
-    border-radius: 50%;
-
-    background: rgba(17, 17, 17, 0.8);
-    color: #f2f2f2;
-
-    font-size: 28px;
-    font-weight: bold;
-
-    cursor: pointer;
-    transition: all 0.3s ease;
+.highlight-slide.active img {
+  transform: scale(1);
 }
 
-.highlight-prev {
-    left: 18px;
+.highlight-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(11, 25, 44, 0.95) 0%,
+    rgba(11, 25, 44, 0.6) 35%,
+    rgba(11, 25, 44, 0.2) 75%,
+    rgba(11, 25, 44, 0.05) 100%
+  );
 }
 
-.highlight-next {
-    right: 18px;
+.highlight-content {
+  position: absolute;
+  left: 7%;
+  bottom: 12%;
+  max-width: 700px;
+  color: white;
+  z-index: 5;
 }
 
-.highlight-prev:hover,
-.highlight-next:hover {
-    background: #c8102e;
-    border-color: #f2f2f2;
-    color: white;
-    transform: translateY(-50%) scale(1.08);
+.highlight-label {
+  margin: 0 0 15px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.75);
 }
 
+.highlight-content h1 {
+  margin: 0 0 18px;
+  font-size: clamp(42px, 6vw, 86px);
+  line-height: 0.95;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
 
-/* =========================================
-   DOTS
-========================================= */
+.highlight-content > p:last-child {
+  margin: 0;
+  max-width: 580px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.86);
+}
 
 .highlight-dots {
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 5;
-
-    display: flex;
-    gap: 9px;
+  position: absolute;
+  left: 7%;
+  bottom: 5%;
+  z-index: 10;
+  display: flex;
+  gap: 9px;
 }
 
-.highlight-dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-
-    background: rgba(242, 242, 242, 0.7);
-
-    cursor: pointer;
-    transition: all 0.3s ease;
+.highlight-dots button {
+  width: 35px;
+  height: 4px;
+  padding: 0;
+  border: 0;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
-.highlight-dot:hover {
-    background: #f2f2f2;
-}
-
-.highlight-dot.active {
-    width: 22px;
-    border-radius: 10px;
-    background: #c8102e;
-    transform: scale(1.05);
+.highlight-dots button.active {
+  width: 60px;
+  background: var(--white);
 }
 
 
-/* =========================================
-   THREE EVENT SECTIONS
-========================================= */
+/* =========================================================
+   THREE ARENAS
+   ========================================================= */
 
-.event-sections {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    padding: 10px 4% 50px;
+.arenas-section {
+  width: 100%;
+  padding: 110px 30px;
+  background: var(--light-navy);
 }
 
-.event-box {
-    min-height: 310px;
-    padding: 35px 28px;
-
-    border: 2px solid #111111;
-    border-radius: 16px;
-
-    text-decoration: none;
-    text-align: center;
-
-    color: #111111;
-    background: #e6e6e6;
-
-    box-shadow:
-        0 7px 20px rgba(0, 0, 0, 0.12);
-
-    transition: all 0.3s ease;
+.arenas-heading {
+  width: min(100%, 900px);
+  margin: 0 auto 55px;
+  text-align: center;
 }
 
-.event-box:hover {
-    transform: translateY(-8px);
-
-    border-color: #c8102e;
-    background: #f2f2f2;
-
-    box-shadow:
-        0 18px 40px rgba(120, 0, 0, 0.2);
+.arenas-heading span {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--navy-light);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 4px;
 }
 
-
-/* EVENT ICON */
-
-.event-icon {
-    width: 70px;
-    height: 70px;
-
-    margin: auto;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border-radius: 50%;
-
-    background: #111111;
-    color: #f2f2f2;
-
-    font-size: 32px;
-
-    box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.2);
+.arenas-heading h2 {
+  margin: 0;
+  color: var(--navy-dark);
+  font-size: clamp(34px, 5vw, 58px);
+  font-weight: 800;
+  letter-spacing: -1px;
 }
 
-.event-box:hover .event-icon {
-    background: #c8102e;
+.arenas-heading p {
+  max-width: 650px;
+  margin: 18px auto 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
 }
 
-
-/* EVENT TITLE */
-
-.event-box h2 {
-    margin-top: 22px;
-
-    color: #a00018;
-
-    font-size: 30px;
-    font-weight: 900;
-
-    letter-spacing: 0.5px;
+.arenas-grid {
+  width: min(100%, var(--max-width));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
 }
 
-
-/* RED LINE */
-
-.red-line {
-    width: 50px;
-    height: 3px;
-
-    margin: 10px auto 18px;
-
-    background: #c8102e;
-
-    border-radius: 5px;
+.arena-card {
+  min-height: 330px;
+  padding: 38px;
+  position: relative;
+  overflow: hidden;
+  background: var(--white);
+  color: var(--navy-dark);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
-
-/* EVENT DESCRIPTION */
-
-.event-box p {
-    max-width: 300px;
-
-    margin: auto;
-
-    color: #333333;
-
-    line-height: 1.6;
+.arena-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5px;
+  background: var(--navy);
+  transition: height 0.35s ease;
 }
 
-
-/* EVENT BUTTON */
-
-.event-box button {
-    margin-top: 25px;
-
-    border: 2px solid #111111;
-    border-radius: 25px;
-
-    padding: 11px 23px;
-
-    background: #c8102e;
-    color: white;
-
-    font-weight: 800;
-
-    cursor: pointer;
-
-    transition: all 0.3s ease;
+.arena-card:hover {
+  background: var(--navy);
+  color: var(--white);
+  transform: translateY(-8px);
+  border-color: var(--navy);
+  box-shadow: 0 18px 35px rgba(11, 25, 44, 0.16);
 }
 
-.event-box:hover button {
-    background: #111111;
-    color: #f2f2f2;
+.arena-card:hover::after {
+  height: 0;
 }
 
-
-/* =========================================
-   PEOPLE + UPDATES
-========================================= */
-
-.dashboard-section {
-    display: grid;
-
-    grid-template-columns: 2fr 1fr;
-
-    gap: 25px;
-
-    padding: 0 4% 50px;
+.arena-number {
+  color: var(--navy-light);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  transition: color 0.35s ease;
 }
 
-.people-section,
-.updates-section {
-    border: 2px solid #111111;
+.arena-card:hover .arena-number {
+  color: rgba(255, 255, 255, 0.6);
+}
 
-    border-radius: 16px;
+.arena-card-middle {
+  position: relative;
+  z-index: 2;
+}
 
-    padding: 25px;
+.arena-card h3 {
+  margin: 0 0 15px;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
 
-    background: #f2f2f2;
+.arena-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  transition: color 0.35s ease;
+}
 
-    box-shadow:
-        0 7px 20px rgba(0, 0, 0, 0.1);
+.arena-card:hover p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.arena-explore {
+  position: relative;
+  z-index: 2;
+  margin-top: 25px;
+  color: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
 }
 
 
-/* PEOPLE BLOCK */
+/* =========================================================
+   STUDENT SECRETARIES
+   ========================================================= */
 
-.people-block + .people-block {
-    margin-top: 40px;
+.secretaries-section {
+  width: 100%;
+  padding: 100px 30px;
+  background: var(--white);
+}
+
+.secretaries-heading {
+  width: min(100%, var(--max-width));
+  margin: 0 auto 50px;
+}
+
+.secretaries-heading span {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--navy-light);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 4px;
+}
+
+.secretaries-heading h2 {
+  margin: 0;
+  color: var(--navy-dark);
+  font-size: clamp(34px, 5vw, 58px);
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.secretaries-grid {
+  width: min(100%, var(--max-width));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.secretary-group {
+  padding: 35px;
+  background: var(--light-navy);
+  border: 1px solid var(--border);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.secretary-group:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(11, 25, 44, 0.08);
+}
+
+.secretary-title {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--border);
+}
+
+.secretary-title > span {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--navy);
+  color: white;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.secretary-title h3 {
+  margin: 0;
+  color: var(--navy-dark);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.secretary-names {
+  display: flex;
+  flex-direction: column;
+}
+
+.secretary-person {
+  padding: 22px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  border-bottom: 1px solid var(--border);
+}
+
+.secretary-person:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.gender {
+  color: var(--navy-light);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.secretary-person strong {
+  color: var(--navy-dark);
+  font-size: 16px;
+  font-weight: 700;
 }
 
 
-/* PEOPLE GRID */
+/* =========================================================
+   FINAL FAMT ARENA FOOTER
+   ========================================================= */
 
-.people-grid {
-    display: grid;
+.arena-footer {
+  width: 100%;
+  background: var(--navy-dark);
+  color: white;
+}
 
-    grid-template-columns: repeat(4, 1fr);
+.footer-content {
+  width: min(calc(100% - 80px), var(--max-width));
+  margin: 0 auto;
+  padding: 70px 0 25px;
+}
 
-    gap: 15px;
+.footer-title {
+  margin-bottom: 40px;
+  color: white;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+}
+
+.footer-social {
+  min-height: 100px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 38px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: white;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.footer-social:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-5px);
+}
+
+.footer-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-radius: 9px;
+  color: white;
+  font-size: 21px;
+}
+
+.footer-category {
+  display: block;
+  margin-bottom: 5px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.footer-social strong {
+  display: block;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.footer-arrow {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 20px;
+}
+
+.footer-bottom {
+  margin-top: 55px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 11px;
 }
 
 
-/* PERSON CARD */
-
-.person-card {
-    border: 1px solid #111111;
-
-    border-radius: 12px;
-
-    padding: 10px;
-
-    text-align: center;
-
-    background: #e6e6e6;
-
-    transition: all 0.3s ease;
-}
-
-.person-card:hover {
-    transform: translateY(-5px);
-
-    border-color: #c8102e;
-
-    box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-
-/* PERSON IMAGE */
-
-.person-card img {
-    width: 100%;
-    height: 150px;
-
-    object-fit: cover;
-
-    border-radius: 9px;
-
-    border: 2px solid #111111;
-}
-
-
-/* PERSON NAME */
-
-.person-card h3 {
-    margin: 10px 0 3px;
-
-    color: #111111;
-
-    font-size: 15px;
-}
-
-
-/* PERSON ROLE */
-
-.person-card p {
-    margin: 0;
-
-    color: #c8102e;
-
-    font-size: 13px;
-
-    font-weight: 700;
-}
-
-
-/* =========================================
-   HIGHLIGHTS / UPDATES
-========================================= */
-
-.update-card {
-    border: 1px solid #111111;
-
-    border-radius: 12px;
-
-    padding: 17px;
-
-    margin-bottom: 15px;
-
-    background: #e6e6e6;
-
-    transition: all 0.3s ease;
-}
-
-.update-card:hover {
-    border-color: #c8102e;
-
-    transform: translateX(3px);
-}
-
-
-/* LIVE LABEL */
-
-.update-card span {
-    display: inline-block;
-
-    padding: 4px 9px;
-
-    background: #c8102e;
-
-    color: white;
-
-    border-radius: 4px;
-
-    font-size: 11px;
-
-    font-weight: bold;
-}
-
-
-/* UPDATE TITLE */
-
-.update-card h3 {
-    margin: 8px 0;
-
-    color: #111111;
-}
-
-
-/* UPDATE TEXT */
-
-.update-card p {
-    color: #333333;
-
-    line-height: 1.5;
-
-    font-size: 14px;
-}
-
-
-/* UPDATE DATE */
-
-.update-card small {
-    color: #555555;
-}
-
-
-/* VIEW UPDATES */
-
-.view-updates {
-    width: 100%;
-
-    padding: 11px;
-
-    border: 2px solid #c8102e;
-
-    background: #111111;
-
-    color: #f2f2f2;
-
-    border-radius: 8px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: all 0.3s ease;
-}
-
-.view-updates:hover {
-    background: #c8102e;
-
-    color: white;
-}
-
-
-/* =========================================
-   SOCIAL MEDIA
-========================================= */
-
-.social-section {
-    margin: 0 4% 45px;
-
-    padding: 25px;
-
-    border: 2px solid #111111;
-
-    border-radius: 16px;
-
-    background: #e6e6e6;
-
-    box-shadow:
-        0 7px 20px rgba(0, 0, 0, 0.1);
-}
-
-.social-grid {
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 30px;
-}
-
-.social-grid > div {
-    padding-left: 20px;
-
-    border-left: 3px solid #111111;
-}
-
-.social-grid > div:hover {
-    border-left-color: #c8102e;
-}
-
-.social-grid h3 {
-    color: #a00018;
-
-    margin-bottom: 12px;
-
-    font-weight: 900;
-}
-
-.social-grid a {
-    display: block;
-
-    margin: 8px 0;
-
-    color: #222222;
-
-    text-decoration: none;
-
-    transition: all 0.2s ease;
-}
-
-.social-grid a:hover {
-    color: #c8102e;
-
-    transform: translateX(4px);
-}
-
-
-/* =========================================
-   FOOTER
-========================================= */
-
-.landing-footer {
-    padding: 22px;
-
-    text-align: center;
-
-    background: #111111;
-
-    color: #f2f2f2;
-
-    border-top: 5px solid #c8102e;
-
-    font-size: 14px;
-}
-
-
-/* =========================================
-   TABLET RESPONSIVE
-========================================= */
+/* =========================================================
+   TABLET
+   ========================================================= */
 
 @media (max-width: 900px) {
+  .arenas-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .event-sections {
-        grid-template-columns: 1fr;
-    }
+  .arena-card {
+    min-height: 280px;
+  }
 
-    .dashboard-section {
-        grid-template-columns: 1fr;
-    }
+  .secretaries-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .people-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .social-grid {
-        grid-template-columns: 1fr;
-    }
+  .footer-links {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 
-/* =========================================
+/* =========================================================
    MOBILE
-========================================= */
+   ========================================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 700px) {
+  .arena-navbar {
+    height: 80px;
+  }
 
-    /* HEADER */
+  .navbar-inner {
+    width: calc(100% - 25px);
+  }
 
-    .landing-header {
-        padding: 20px 5%;
-    }
+  .famt-logo {
+    width: 45px;
+    height: 45px;
+  }
 
-    .logo-area {
-        gap: 15px;
-    }
+  .brand-title {
+    font-size: 17px;
+    letter-spacing: 1.3px;
+  }
 
-    .famt-logo {
-        width: 65px;
-        height: 65px;
-    }
+  .brand-tagline {
+    display: none;
+  }
 
-    .logo-area h1 {
-        font-size: 22px;
-    }
+  .desktop-nav {
+    display: none;
+  }
 
-    .logo-area p {
-        font-size: 11px;
+  .mobile-menu-button {
+    display: block;
+  }
 
-        margin-top: 6px;
+  .highlights {
+    height: calc(100vh - 80px);
+    min-height: 550px;
+  }
 
-        letter-spacing: 1px;
-    }
+  .highlight-content {
+    left: 25px;
+    right: 25px;
+    bottom: 13%;
+  }
 
+  .highlight-content h1 {
+    font-size: 45px;
+    letter-spacing: -1px;
+  }
 
-    /* HIGHLIGHTS */
+  .highlight-content > p:last-child {
+    font-size: 14px;
+    line-height: 1.6;
+  }
 
-    .highlight-slider-section {
-        padding: 15px 2% 35px;
-    }
+  .highlight-dots {
+    left: 25px;
+    bottom: 6%;
+  }
 
-    .highlight-slider {
-        height: 250px;
+  .arenas-section {
+    padding: 75px 20px;
+  }
 
-        border-radius: 10px;
+  .arenas-heading {
+    margin-bottom: 40px;
+  }
 
-        border-width: 2px;
-    }
+  .arenas-heading h2 {
+    font-size: 36px;
+  }
 
-    .highlight-prev,
-    .highlight-next {
-        width: 34px;
-        height: 34px;
+  .arenas-heading p {
+    font-size: 14px;
+  }
 
-        font-size: 22px;
-    }
+  .arena-card {
+    min-height: 260px;
+    padding: 30px;
+  }
 
-    .highlight-prev {
-        left: 10px;
-    }
+  .arena-card h3 {
+    font-size: 27px;
+  }
 
-    .highlight-next {
-        right: 10px;
-    }
+  .secretaries-section {
+    padding: 75px 20px;
+  }
 
-    .highlight-dots {
-        bottom: 10px;
-    }
+  .secretaries-heading {
+    margin-bottom: 35px;
+  }
 
+  .secretaries-heading h2 {
+    font-size: 36px;
+  }
 
-    /* EVENT BOXES */
+  .secretary-group {
+    padding: 28px;
+  }
 
-    .event-sections {
-        padding: 10px 5% 40px;
+  .footer-content {
+    width: calc(100% - 40px);
+    padding: 55px 0 20px;
+  }
 
-        gap: 18px;
-    }
+  .footer-title {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
 
-    .event-box {
-        min-height: 280px;
+  .footer-links {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
 
-        padding: 28px 20px;
-    }
-
-
-    /* PEOPLE */
-
-    .people-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-
-    /* SOCIAL */
-
-    .social-section {
-        margin: 0 5% 35px;
-    }
-
-    .social-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .social-grid > div {
-        border-left: none;
-
-        border-bottom: 2px solid #111111;
-
-        padding: 15px 0;
-    }
-}
-
-
-/* =========================================
-   SMALL MOBILE
-========================================= */
-
-@media (max-width: 500px) {
-
-    .logo-area {
-        align-items: center;
-    }
-
-    .famt-logo {
-        width: 55px;
-        height: 55px;
-    }
-
-    .logo-area h1 {
-        font-size: 19px;
-    }
-
-    .logo-area p {
-        font-size: 10px;
-    }
-
-    .highlight-slider {
-        height: 210px;
-    }
-
-    .people-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .section-heading h2 {
-        font-size: 20px;
-    }
+  .footer-social {
+    min-height: 85px;
+    padding: 17px;
+  }
 }

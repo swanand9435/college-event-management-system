@@ -1,0 +1,1311 @@
+/* =========================================================
+   FAMT ARENA - SPORTS LANDING PAGE
+   Navy / White / Grey
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap');
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+.sports-page {
+  --navy: #071a33;
+  --navy-2: #0b2748;
+  --blue: #123b68;
+  --white: #ffffff;
+  --off-white: #f5f7fa;
+  --grey: #e7ebf0;
+  --text: #152235;
+  --muted: #6c7785;
+  --gold: #d6a72c;
+  --green: #20a567;
+  --red: #e5484d;
+
+  background: var(--white);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+}
+
+.sports-page *,
+.sports-page *::before,
+.sports-page *::after {
+  box-sizing: border-box;
+}
+
+.sports-page button,
+.sports-page a {
+  font-family: inherit;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.sports-hero {
+  min-height: 92vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(4, 18, 36, 0.96),
+      rgba(7, 26, 51, 0.72),
+      rgba(7, 26, 51, 0.45)
+    ),
+    url("/images/sports/sports-hero.jpg");
+
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.sports-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 70% 40%,
+      rgba(255, 255, 255, 0.08),
+      transparent 35%
+    );
+}
+
+.sports-hero-content {
+  position: relative;
+  z-index: 2;
+  width: min(1100px, 90%);
+}
+
+.sports-kicker {
+  font-family: "Orbitron", sans-serif;
+  font-size: 14px;
+  letter-spacing: 5px;
+  color: #b8c8da;
+}
+
+.sports-hero h1 {
+  margin: 15px 0 10px;
+
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(60px, 11vw, 150px);
+  line-height: 0.9;
+  letter-spacing: 5px;
+}
+
+.sports-hero p {
+  font-size: 18px;
+  letter-spacing: 5px;
+  color: #dbe4ee;
+}
+
+.sports-hero p span {
+  color: var(--gold);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.primary-btn,
+.secondary-btn,
+.outline-btn,
+.register-btn,
+.draw-btn {
+  border: none;
+  padding: 14px 22px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: 0.25s ease;
+}
+
+.primary-btn {
+  background: white;
+  color: var(--navy);
+}
+
+.primary-btn:hover {
+  transform: translateY(-3px);
+}
+
+.secondary-btn {
+  border: 1px solid rgba(255,255,255,0.45);
+  color: white;
+  background: rgba(255,255,255,0.08);
+}
+
+.secondary-btn:hover {
+  background: white;
+  color: var(--navy);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #c7d3df;
+}
+
+.hero-scroll span {
+  font-size: 22px;
+}
+
+
+/* =========================================================
+   COMMON SECTION
+   ========================================================= */
+
+.sports-section {
+  width: min(1250px, 90%);
+  margin: auto;
+  padding: 110px 0;
+}
+
+.section-heading {
+  margin-bottom: 55px;
+}
+
+.section-heading span {
+  font-family: "Orbitron", sans-serif;
+  color: var(--blue);
+  font-size: 11px;
+  letter-spacing: 3px;
+  font-weight: 700;
+}
+
+.section-heading h2 {
+  margin: 10px 0;
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(32px, 5vw, 58px);
+  color: var(--navy);
+  letter-spacing: 1px;
+}
+
+.section-heading h2 strong {
+  font-weight: 800;
+}
+
+.section-heading p {
+  color: var(--muted);
+  max-width: 600px;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   LIVE
+   ========================================================= */
+
+.live-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.live-card {
+  background: var(--navy);
+  color: white;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.live-card::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 50%;
+  right: -70px;
+  top: -70px;
+}
+
+.live-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #ff767a;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.live-badge i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 1.3s infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.match-sport {
+  color: #b8c8da;
+  font-size: 13px;
+}
+
+.match-stage {
+  display: block;
+  margin-top: 35px;
+  font-size: 11px;
+  color: #9eb0c4;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.score-area {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 20px;
+  align-items: center;
+  margin: 25px 0;
+}
+
+.team-score {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.team-score:last-child {
+  text-align: right;
+}
+
+.team-score span {
+  color: #c6d3df;
+  font-size: 13px;
+}
+
+.team-score strong {
+  font-family: "Orbitron", sans-serif;
+  font-size: 34px;
+}
+
+.vs {
+  color: #7d8da0;
+  font-size: 11px;
+}
+
+.match-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: #aebdcb;
+  font-size: 11px;
+}
+
+.card-link {
+  border: none;
+  background: none;
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  cursor: pointer;
+  padding: 0;
+}
+
+
+/* =========================================================
+   POINT TABLE
+   ========================================================= */
+
+.points-section {
+  max-width: 1400px;
+}
+
+.points-section {
+  background: var(--off-white);
+  width: 100%;
+  padding-left: max(5%, calc((100% - 1250px) / 2));
+  padding-right: max(5%, calc((100% - 1250px) / 2));
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.points-table {
+  width: 100%;
+  min-width: 750px;
+  border-collapse: collapse;
+  background: white;
+}
+
+.points-table th {
+  background: var(--navy);
+  color: white;
+  padding: 17px;
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.points-table td {
+  padding: 19px 17px;
+  border-bottom: 1px solid var(--grey);
+  font-size: 14px;
+}
+
+.points-table tr:hover {
+  background: #f7f9fb;
+}
+
+.rank-number {
+  font-weight: 800;
+}
+
+.total-points {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+
+/* =========================================================
+   SPORTS / REGISTRATION
+   ========================================================= */
+
+.events-section {
+  max-width: 1400px;
+}
+
+.sport-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 35px;
+}
+
+.sport-filters button {
+  border: 1px solid #ccd4dd;
+  background: white;
+  color: var(--text);
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.sport-filters button.active {
+  background: var(--navy);
+  color: white;
+  border-color: var(--navy);
+}
+
+.sports-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.sport-card {
+  border: 1px solid var(--grey);
+  padding: 28px;
+  background: white;
+  transition: 0.25s ease;
+}
+
+.sport-card:hover {
+  transform: translateY(-5px);
+  border-color: #b6c4d2;
+  box-shadow: 0 15px 35px rgba(7, 26, 51, 0.08);
+}
+
+.sport-card-icon {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.sport-type {
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.sport-card h3 {
+  font-family: "Orbitron", sans-serif;
+  margin: 8px 0 18px;
+  color: var(--navy);
+  font-size: 22px;
+}
+
+.registration-status {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 1px;
+  font-weight: 800;
+  padding: 7px 9px;
+  margin-bottom: 15px;
+}
+
+.registration-status.open {
+  background: #e7f7ef;
+  color: var(--green);
+}
+
+.registration-status.closing {
+  background: #fff6dc;
+  color: #a77a00;
+}
+
+.registration-status.closed {
+  background: #fcebed;
+  color: var(--red);
+}
+
+.registration-status.upcoming {
+  background: #edf3fa;
+  color: var(--blue);
+}
+
+.sport-card p {
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 13px;
+}
+
+.sport-details {
+  border-top: 1px solid var(--grey);
+  margin-top: 20px;
+  padding-top: 20px;
+  display: grid;
+  gap: 13px;
+}
+
+.sport-details div {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.sport-details small {
+  color: var(--muted);
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+.sport-details strong {
+  font-size: 11px;
+  text-align: right;
+}
+
+.sport-card-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 25px;
+}
+
+.register-btn {
+  background: var(--navy);
+  color: white;
+  flex: 1;
+}
+
+.draw-btn {
+  background: #edf3fa;
+  color: var(--navy);
+  flex: 1;
+}
+
+.outline-btn {
+  background: white;
+  color: var(--navy);
+  border: 1px solid var(--navy);
+}
+
+
+/* =========================================================
+   UPCOMING
+   ========================================================= */
+
+.upcoming-section {
+  background: var(--navy);
+  color: white;
+  width: 100%;
+  max-width: none;
+  padding-left: max(5%, calc((100% - 1250px) / 2));
+  padding-right: max(5%, calc((100% - 1250px) / 2));
+}
+
+.upcoming-section .section-heading h2 {
+  color: white;
+}
+
+.upcoming-section .section-heading span {
+  color: #a9bfd6;
+}
+
+.upcoming-section .section-heading p {
+  color: #aebdcb;
+}
+
+.upcoming-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.upcoming-card {
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 25px;
+  background: rgba(255,255,255,0.04);
+}
+
+.upcoming-top {
+  display: flex;
+  justify-content: space-between;
+  color: #c9d6e2;
+  font-size: 12px;
+}
+
+.upcoming-top small {
+  color: #8ea4ba;
+  letter-spacing: 1px;
+}
+
+.upcoming-teams {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 12px;
+  align-items: center;
+  margin: 35px 0;
+}
+
+.upcoming-teams strong:last-child {
+  text-align: right;
+}
+
+.upcoming-teams span {
+  color: #71869b;
+  font-size: 9px;
+}
+
+.upcoming-info {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: #aebdcb;
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   SCHEDULE
+   ========================================================= */
+
+.schedule-list {
+  border-left: 2px solid var(--navy);
+}
+
+.schedule-day {
+  padding-left: 30px;
+  margin-bottom: 55px;
+}
+
+.schedule-day > h3 {
+  font-family: "Orbitron", sans-serif;
+  color: var(--navy);
+  margin-bottom: 20px;
+}
+
+.schedule-match {
+  display: grid;
+  grid-template-columns: 130px 1fr 220px;
+  align-items: center;
+  gap: 20px;
+  border-top: 1px solid var(--grey);
+  padding: 22px 0;
+}
+
+.schedule-time {
+  font-family: "Orbitron", sans-serif;
+  font-size: 12px;
+  color: var(--blue);
+}
+
+.schedule-sport {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.schedule-sport span {
+  font-size: 28px;
+}
+
+.schedule-sport strong,
+.schedule-sport small {
+  display: block;
+}
+
+.schedule-sport strong {
+  font-size: 14px;
+}
+
+.schedule-sport small {
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.schedule-venue {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   PLAYER RANKINGS
+   ========================================================= */
+
+.rankings-section {
+  background: var(--off-white);
+  width: 100%;
+  max-width: none;
+  padding-left: max(5%, calc((100% - 1250px) / 2));
+  padding-right: max(5%, calc((100% - 1250px) / 2));
+}
+
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.player-card {
+  background: white;
+  padding: 30px;
+  text-align: center;
+  border: 1px solid var(--grey);
+  position: relative;
+}
+
+.first-player {
+  border: 2px solid var(--gold);
+}
+
+.player-rank {
+  text-align: left;
+  font-family: "Orbitron", sans-serif;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.player-avatar {
+  width: 90px;
+  height: 90px;
+  margin: 20px auto;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--navy);
+  color: white;
+  font-family: "Orbitron", sans-serif;
+  font-size: 20px;
+}
+
+.player-card h3 {
+  margin-bottom: 5px;
+  color: var(--navy);
+}
+
+.player-card > span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.player-points {
+  display: block;
+  margin: 22px 0 12px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 25px;
+}
+
+.player-points small {
+  font-size: 8px;
+  color: var(--muted);
+}
+
+.medals {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.medals span {
+  margin: 0 7px;
+}
+
+
+/* =========================================================
+   LOTS
+   ========================================================= */
+
+.lots-section {
+  max-width: none;
+  width: 100%;
+  background: #edf2f7;
+}
+
+.lots-content {
+  width: min(1250px, 90%);
+  margin: auto;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 70px;
+  align-items: center;
+}
+
+.left-heading {
+  margin: 0;
+}
+
+.lots-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.lot-card {
+  background: white;
+  padding: 25px;
+  border: 1px solid #dbe2e9;
+}
+
+.lot-card > span {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.lot-card div {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+.lot-card strong:last-child {
+  text-align: right;
+}
+
+.lot-card small {
+  color: var(--muted);
+}
+
+
+/* =========================================================
+   AWARDS
+   ========================================================= */
+
+.excellence-section {
+  text-align: center;
+}
+
+.excellence-section .section-heading p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.award-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.award-card {
+  padding: 35px;
+  background: var(--off-white);
+  border: 1px solid var(--grey);
+}
+
+.featured-award {
+  border: 2px solid var(--gold);
+}
+
+.award-label {
+  font-family: "Orbitron", sans-serif;
+  color: var(--navy);
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.award-photo {
+  width: 150px;
+  height: 150px;
+  margin: 25px auto;
+  background: #dbe2e9;
+  display: grid;
+  place-items: center;
+  color: #718095;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.award-card h3 {
+  font-family: "Orbitron", sans-serif;
+  color: var(--navy);
+}
+
+.award-card p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.award-card > strong {
+  color: var(--blue);
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   HIGHLIGHTS
+   ========================================================= */
+
+.highlights-section {
+  max-width: 1400px;
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr 0.8fr;
+  grid-template-rows: 250px 250px;
+  gap: 12px;
+}
+
+.highlight-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--navy);
+}
+
+.highlight-1 {
+  grid-row: span 2;
+}
+
+.highlight-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.highlight-card:hover img {
+  transform: scale(1.06);
+}
+
+.highlight-overlay {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 25px;
+  color: white;
+  background: linear-gradient(
+    transparent,
+    rgba(0,0,0,0.8)
+  );
+}
+
+.highlight-overlay span {
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.highlight-overlay h3 {
+  margin: 5px 0 0;
+  font-family: "Orbitron", sans-serif;
+}
+
+.gallery-btn {
+  display: block;
+  margin: 30px auto 0;
+}
+
+
+/* =========================================================
+   COMMITTEE
+   ========================================================= */
+
+.committee-section {
+  background: var(--off-white);
+  width: 100%;
+  max-width: none;
+  padding-left: max(5%, calc((100% - 1250px) / 2));
+  padding-right: max(5%, calc((100% - 1250px) / 2));
+}
+
+.committee-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.committee-card {
+  background: white;
+  padding: 20px;
+}
+
+.committee-photo {
+  height: 250px;
+  background: #dce3ea;
+  overflow: hidden;
+}
+
+.committee-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.committee-card h3 {
+  margin: 20px 0 5px;
+  color: var(--navy);
+  font-size: 15px;
+}
+
+.committee-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.sports-footer {
+  background: #041426;
+  color: white;
+  padding: 80px 5% 30px;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: "Orbitron", sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.footer-logo span {
+  font-weight: 400;
+}
+
+.sports-footer > p {
+  color: #8fa3b7;
+  letter-spacing: 4px;
+  font-size: 10px;
+  margin: 15px 0 35px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: #b7c5d3;
+  text-decoration: none;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin-top: 50px;
+  padding-top: 25px;
+  color: #61758b;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   SCORECARD MODAL
+   ========================================================= */
+
+.score-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: grid;
+  place-items: center;
+
+  padding: 20px;
+
+  background: rgba(1, 10, 20, 0.82);
+}
+
+.score-modal-content {
+  width: min(750px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+
+  position: relative;
+
+  background: white;
+  padding: 45px;
+  color: var(--text);
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 18px;
+
+  border: none;
+  background: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: var(--navy);
+}
+
+.modal-sport {
+  font-family: "Orbitron", sans-serif;
+  color: var(--navy);
+  font-size: 25px;
+  margin: 20px 0 5px;
+}
+
+.modal-score {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 25px;
+  margin: 40px 0;
+  text-align: center;
+}
+
+.modal-score div {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-score strong {
+  font-family: "Orbitron", sans-serif;
+  font-size: 35px;
+}
+
+.modal-score b {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.modal-info {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.scorecard-placeholder {
+  margin-top: 35px;
+  padding: 30px;
+  background: var(--off-white);
+  text-align: center;
+}
+
+.scorecard-placeholder h3 {
+  font-family: "Orbitron", sans-serif;
+  color: var(--navy);
+}
+
+.scorecard-placeholder p {
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 13px;
+}
+
+.scorecard-placeholder span {
+  font-size: 10px;
+  color: var(--blue);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .sports-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .players-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .committee-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lots-content {
+    grid-template-columns: 1fr;
+  }
+
+  .upcoming-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .sports-section {
+    padding: 75px 0;
+  }
+
+  .sports-hero {
+    min-height: 80vh;
+  }
+
+  .sports-hero h1 {
+    font-size: 58px;
+  }
+
+  .sports-hero p {
+    font-size: 11px;
+    letter-spacing: 3px;
+  }
+
+  .live-grid,
+  .sports-grid,
+  .upcoming-grid,
+  .award-grid,
+  .committee-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .players-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .score-area {
+    gap: 8px;
+  }
+
+  .team-score strong {
+    font-size: 24px;
+  }
+
+  .team-score span {
+    font-size: 10px;
+  }
+
+  .schedule-match {
+    grid-template-columns: 80px 1fr;
+  }
+
+  .schedule-venue {
+    grid-column: 2;
+  }
+
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 220px 180px 180px;
+  }
+
+  .highlight-1 {
+    grid-column: span 2;
+    grid-row: auto;
+  }
+
+  .lots-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .score-modal-content {
+    padding: 30px 20px;
+  }
+
+}
+
+
+@media (max-width: 450px) {
+
+  .sports-section {
+    width: 92%;
+  }
+
+  .sports-hero h1 {
+    font-size: 48px;
+  }
+
+  .players-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    text-align: center;
+  }
+
+  .score-area {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .team-score:last-child {
+    text-align: center;
+  }
+
+  .vs {
+    display: none;
+  }
+
+  .match-info {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+}
