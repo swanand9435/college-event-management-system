@@ -1,0 +1,556 @@
+.sports-registration-page {
+  min-height: 100vh;
+  background: #f4f4f4;
+  color: #111827;
+  font-family: Inter, Arial, sans-serif;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.registration-header {
+  min-height: 74px;
+  background: #07152f;
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 6vw;
+  gap: 20px;
+}
+
+.registration-brand {
+  font-family: Orbitron, Inter, sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.registration-brand span {
+  color: #f5c400;
+}
+
+.back-button {
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.registration-status-open {
+  color: #f5c400;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.registration-hero {
+  background: #07152f;
+  color: #fff;
+  padding: 70px 6vw 80px;
+}
+
+.registration-hero-inner {
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+.registration-kicker {
+  color: #f5c400;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.registration-hero h1 {
+  margin: 12px 0 14px;
+
+  font-family: Orbitron, Inter, sans-serif;
+
+  font-size: clamp(38px, 6vw, 72px);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.registration-hero p {
+  max-width: 650px;
+
+  margin: 0;
+
+  color: rgba(255,255,255,.7);
+
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.registration-meta {
+  display: flex;
+  flex-wrap: wrap;
+
+  margin-top: 42px;
+
+  border-top: 1px solid rgba(255,255,255,.15);
+  border-bottom: 1px solid rgba(255,255,255,.15);
+}
+
+.registration-meta div {
+  min-width: 190px;
+
+  padding: 20px 30px 20px 0;
+  margin-right: 30px;
+}
+
+.registration-meta span {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: rgba(255,255,255,.45);
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.registration-meta strong {
+  color: #fff;
+
+  font-size: 14px;
+}
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.registration-main {
+  padding: 60px 20px 90px;
+}
+
+.registration-form-card {
+  max-width: 900px;
+  margin: 0 auto;
+
+  background: #fff;
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.08);
+
+  padding: clamp(25px, 5vw, 55px);
+}
+
+.form-heading {
+  padding-bottom: 35px;
+
+  border-bottom:
+    1px solid #e5e7eb;
+}
+
+.form-heading > span {
+  color: #d60000;
+
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.form-heading h2 {
+  margin: 8px 0;
+
+  font-family: Orbitron, Inter, sans-serif;
+
+  font-size: 30px;
+  text-transform: uppercase;
+}
+
+.form-heading p {
+  margin: 0;
+
+  color: #6b7280;
+
+  line-height: 1.6;
+}
+
+/* =====================================================
+   FORM MESSAGES
+===================================================== */
+
+.form-message {
+  margin: 25px 0;
+  padding: 17px 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  font-size: 14px;
+}
+
+.form-message.error {
+  background: #fff1f1;
+  border-left: 4px solid #d60000;
+
+  color: #8b0000;
+}
+
+.form-message.success {
+  background: #f1f8e9;
+  border-left: 4px solid #4f7d00;
+
+  color: #315500;
+}
+
+.form-message button {
+  width: fit-content;
+
+  margin-top: 10px;
+
+  padding: 10px 15px;
+
+  border: 0;
+
+  background: #07152f;
+  color: #fff;
+
+  cursor: pointer;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* =====================================================
+   FORM SECTION
+===================================================== */
+
+.form-section {
+  padding: 38px 0;
+
+  border-bottom:
+    1px solid #e5e7eb;
+}
+
+.form-section-title {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  margin-bottom: 25px;
+
+  color: #d60000;
+
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.form-section-title span {
+  color: #111827;
+}
+
+/* =====================================================
+   FORM GRID
+===================================================== */
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.form-field.full {
+  grid-column: 1 / -1;
+}
+
+.form-field > span {
+  color: #374151;
+
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+  box-sizing: border-box;
+
+  min-height: 48px;
+
+  padding: 0 14px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 0;
+
+  background: #fff;
+  color: #111827;
+
+  outline: none;
+
+  font-size: 14px;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  border-color: #07152f;
+
+  box-shadow:
+    0 0 0 2px rgba(7,21,47,.08);
+}
+
+.form-field input::placeholder {
+  color: #9ca3af;
+}
+
+/* =====================================================
+   TEAM NOTE
+===================================================== */
+
+.team-note {
+  margin-bottom: 25px;
+
+  padding: 14px 17px;
+
+  background: #f8f8f8;
+  border-left: 3px solid #f5c400;
+
+  color: #5b6472;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =====================================================
+   SUBMIT
+===================================================== */
+
+.registration-submit-area {
+  padding-top: 35px;
+}
+
+.submit-note {
+  margin-bottom: 18px;
+
+  color: #6b7280;
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.registration-submit {
+  width: 100%;
+
+  min-height: 56px;
+
+  border: 0;
+
+  background: #d60000;
+  color: #fff;
+
+  cursor: pointer;
+
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+
+  transition:
+    background .2s ease,
+    transform .2s ease;
+}
+
+.registration-submit:hover {
+  background: #a90000;
+  transform: translateY(-1px);
+}
+
+.registration-submit:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =====================================================
+   LOADING / ERROR / CLOSED
+===================================================== */
+
+.registration-loading,
+.registration-error-page,
+.registration-closed-page {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 30px;
+}
+
+.registration-loading {
+  background: #07152f;
+  color: #fff;
+}
+
+.registration-loading span,
+.registration-error-page > span,
+.registration-closed-page > span {
+  color: #f5c400;
+
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.registration-loading h2,
+.registration-error-page h1,
+.registration-closed-page h1 {
+  margin-top: 15px;
+
+  font-family: Orbitron, Inter, sans-serif;
+}
+
+.registration-error-page p,
+.registration-closed-page p {
+  max-width: 500px;
+
+  color: #6b7280;
+
+  line-height: 1.7;
+}
+
+.registration-error-page button,
+.registration-closed-page button {
+  margin-top: 20px;
+
+  padding: 14px 22px;
+
+  border: 0;
+
+  background: #07152f;
+  color: #fff;
+
+  cursor: pointer;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.registration-closed-page {
+  background: #f4f4f4;
+}
+
+.registration-closed-page h1 {
+  color: #d60000;
+}
+
+.registration-closed-page h2 {
+  margin: 5px 0 0;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.registration-footer {
+  background: #07152f;
+  color: #fff;
+
+  padding: 35px 6vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  flex-wrap: wrap;
+}
+
+.registration-footer strong {
+  font-family: Orbitron, Inter, sans-serif;
+  letter-spacing: 1px;
+}
+
+.registration-footer strong::first-letter {
+  color: #f5c400;
+}
+
+.registration-footer span {
+  color: rgba(255,255,255,.6);
+
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.registration-footer small {
+  color: rgba(255,255,255,.4);
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .registration-header {
+    padding: 15px 20px;
+
+    flex-wrap: wrap;
+  }
+
+  .registration-brand {
+    order: -1;
+
+    width: 100%;
+
+    text-align: center;
+  }
+
+  .registration-hero {
+    padding: 55px 20px;
+  }
+
+  .registration-meta {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .registration-meta div {
+    margin-right: 0;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-field.full {
+    grid-column: auto;
+  }
+
+  .registration-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

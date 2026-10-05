@@ -46,7 +46,8 @@ model Sport {
 
 // =====================================================
 // SPORT CATEGORIES / EVENTS
-// Example:
+//
+// Examples:
 // Football -> Boys Team
 // Football -> Girls Team
 // Badminton -> Boys Singles
@@ -56,22 +57,32 @@ model Sport {
 // =====================================================
 
 model SportCategory {
-  id          Int               @id @default(autoincrement())
-  sportId     Int
-  name        String
-  description String?
-  format      CompetitionFormat @default(KNOCKOUT)
-  entryType   EntryType         @default(SINGLE)
-  isActive    Boolean           @default(true)
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
+  id                    Int                         @id @default(autoincrement())
+  sportId               Int
+  name                  String
+  description           String?
+  format                CompetitionFormat          @default(KNOCKOUT)
+  entryType             EntryType                  @default(SINGLE)
 
-  sport        Sport               @relation(fields: [sportId], references: [id])
-  pointSchemes PointScheme[]
-  entries      CompetitionEntry[]
-  draws        Draw[]
-  matches      Match[]
-  results      CompetitionResult[]
+  // ===================================================
+  // REGISTRATION CONTROL
+  // ===================================================
+
+  registrationStatus    CategoryRegistrationStatus @default(CLOSED)
+  registrationStartedAt DateTime?
+  registrationClosedAt  DateTime?
+  registrationEnds      DateTime?
+
+  isActive              Boolean                    @default(true)
+  createdAt             DateTime                   @default(now())
+  updatedAt             DateTime                   @updatedAt
+
+  sport                 Sport                      @relation(fields: [sportId], references: [id])
+  pointSchemes          PointScheme[]
+  entries               CompetitionEntry[]
+  draws                 Draw[]
+  matches               Match[]
+  results               CompetitionResult[]
 
   @@unique([sportId, name])
   @@index([sportId])
@@ -79,6 +90,7 @@ model SportCategory {
 
 // =====================================================
 // YEAR-WISE POINT SCHEME
+//
 // Example:
 // 2026-27 Football Boys Team
 // Gold = 25
@@ -118,7 +130,7 @@ model Player {
 
   department Department @relation(fields: [departmentId], references: [id])
 
-  entries      CompetitionEntry[]  @relation("EntryCaptain")
+  entries      CompetitionEntry[] @relation("EntryCaptain")
   entryPlayers EntryPlayer[]
   captainOf    MatchRegistration[] @relation("Captain")
   performance  PlayerPerformance[]
@@ -136,7 +148,7 @@ model Player {
 //
 // Department is attached to the complete entry.
 //
-// IMPORTANT DRAW RULE:
+// DRAW RULE:
 // Different departments can be paired.
 // Same department CAN also be paired.
 // The draw algorithm will prefer different departments
@@ -144,14 +156,14 @@ model Player {
 // =====================================================
 
 model CompetitionEntry {
-  id           Int       @id @default(autoincrement())
+  id           Int      @id @default(autoincrement())
   categoryId   Int
   departmentId Int
   name         String
   entryType    EntryType
   captainId    Int?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   category   SportCategory @relation(fields: [categoryId], references: [id])
   department Department    @relation(fields: [departmentId], references: [id])
@@ -231,7 +243,6 @@ model Draw {
 // DRAW ROUND
 //
 // Example:
-//
 // Round 1
 // Round 2
 // Quarter Final
@@ -295,7 +306,7 @@ model DrawSlot {
 // =====================================================
 
 model Match {
-  id               Int         @id @default(autoincrement())
+  id               Int          @id @default(autoincrement())
   sportId          Int
   categoryId       Int
   roundId          Int?
@@ -303,7 +314,7 @@ model Match {
   scheduledAt      DateTime?
   registrationEnds DateTime?
   venue            String?
-  status           MatchStatus @default(UPCOMING)
+  status            MatchStatus @default(UPCOMING)
 
   entryAId Int?
   entryBId Int?
@@ -375,7 +386,7 @@ model MatchScore {
 // 2nd -> Player B -> Silver -> 3 points
 // 3rd -> Player C -> Bronze -> 1 point
 //
-// The result is what ultimately affects
+// The result ultimately affects
 // the department point table.
 // =====================================================
 
@@ -390,7 +401,7 @@ model CompetitionResult {
   declaredAt    DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  category SportCategory    @relation(fields: [categoryId], references: [id])
+  category SportCategory     @relation(fields: [categoryId], references: [id])
   entry    CompetitionEntry @relation(fields: [entryId], references: [id])
 
   @@unique([categoryId, entryId, year])
@@ -523,11 +534,19 @@ enum MatchStatus {
   CANCELLED
 }
 
+// Existing registration status.
+// Used by MatchRegistration.
 enum RegistrationStatus {
   PENDING
   APPROVED
   REJECTED
   CANCELLED
+}
+
+// Registration status for a sport category/event.
+enum CategoryRegistrationStatus {
+  OPEN
+  CLOSED
 }
 
 enum EntryType {

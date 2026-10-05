@@ -8,6 +8,7 @@ import Lenis from 'lenis'
 import Landing from './pages/Landing'
 import Cultural from './pages/Cultural'
 import Sports from './pages/Sports'
+import SportsRegistration from './pages/SportsRegistration'
 
 // ==========================================
 // TECHNICAL SECTION
@@ -173,6 +174,12 @@ export default function App() {
           <Route
             path="/sports"
             element={<Sports />}
+          />
+
+          {/* Separate Sports Registration Page */}
+          <Route
+            path="/sports/register/:categoryId"
+            element={<SportsRegistration />}
           />
 
 
