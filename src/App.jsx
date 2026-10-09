@@ -24,6 +24,8 @@ import CulturalEvents from './pages/CulturalEvents'
 import EventDetails from './pages/EventDetails'
 import EventRegistration from './pages/EventRegistration'
 import RegistrationSuccess from './pages/RegistrationSuccess'
+import CulturalCommitteeRegistration from './pages/CulturalCommitteeRegistration'
+import CulturalAdmin from './pages/CulturalAdmin'
 
 // ==========================================
 // COMMON PAGES
@@ -123,6 +125,16 @@ export default function App() {
           <Route
             path="/cultural"
             element={<Cultural />}
+          />
+
+          <Route
+            path="/cultural/committee/:committeeId"
+            element={<CulturalCommitteeRegistration />}
+          />
+
+          <Route
+            path="/cultural/admin"
+            element={<CulturalAdmin />}
           />
 
           <Route

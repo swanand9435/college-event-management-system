@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
-const API_URL = "http://localhost:5000/api";
-const ADMIN_PASSWORD = "2026";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 function Admin() {
   const [password, setPassword] = useState("");
@@ -182,129 +181,210 @@ const isAthletics =
       : "CLOSED";
 
   // ======================================================
-  // LOGIN
+  // AUTHENTICATION & SESSION MANAGEMENT
   // ======================================================
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  const handleLogout = () => {
+    sessionStorage.removeItem("famt_admin_token");
+    setIsAuthenticated(false);
+    setError("");
+    setActiveTab("dashboard");
+  };
 
-    if (password === ADMIN_PASSWORD) {
-      setIsAuthenticated(true);
+  const adminFetch = async (url, options = {}) => {
+    const token = sessionStorage.getItem("famt_admin_token");
+    const headers = {
+      ...(options.headers || {}),
+    };
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    const res = await fetch(url, {
+      ...options,
+      headers,
+    });
+
+    if (res.status === 401 || res.status === 403) {
+      sessionStorage.removeItem("famt_admin_token");
+      setIsAuthenticated(false);
+      setError("Session expired or unauthorized. Please log in again.");
+      throw new Error("Unauthorized. Please log in again.");
+    }
+
+    return res;
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (!password.trim()) {
+      setError("Please enter the admin password");
+      return;
+    }
+
+    try {
+      setLoading(true);
       setError("");
+
+      const response = await fetch(`${API_URL}/admin/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ password: password.trim() }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success || !data.token) {
+        throw new Error(data.message || "Invalid admin password");
+      }
+
+      sessionStorage.setItem("famt_admin_token", data.token);
+      setIsAuthenticated(true);
       setPassword("");
-    } else {
-      setError("Incorrect password");
+    } catch (err) {
+      setError(err.message || "Failed to log in");
+    } finally {
+      setLoading(false);
     }
   };
 
-          // ======================================================
-          // FETCH ADMIN DATA
-          // ======================================================
+  useEffect(() => {
+    const token = sessionStorage.getItem("famt_admin_token");
+    if (!token) {
+      setIsAuthenticated(false);
+      return;
+    }
 
-          const fetchAdminData = async () => {
-            setLoading(true);
-            setError("");
+    fetch(`${API_URL}/admin/verify`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.admin) {
+          setIsAuthenticated(true);
+        } else {
+          sessionStorage.removeItem("famt_admin_token");
+          setIsAuthenticated(false);
+        }
+      })
+      .catch(() => {
+        sessionStorage.removeItem("famt_admin_token");
+        setIsAuthenticated(false);
+      });
+  }, []);
 
-            try {
-              const [
-                sportsRes,
-                entriesRes,
-                matchesRes,
-                liveRes,
-                pointRes,
-                controlsRes,
-                resultsRes,
-              ] = await Promise.all([
-                fetch(`${API_URL}/sports`),
-                fetch(`${API_URL}/entries`),
-                fetch(`${API_URL}/matches`),
-                fetch(`${API_URL}/matches/live`),
-                fetch(`${API_URL}/point-table`),
-                fetch(`${API_URL}/registration-controls`),
-                fetch(`${API_URL}/results`),
-              ]);
+  // ======================================================
+  // FETCH ADMIN DATA
+  // ======================================================
 
-              const sportsResult =
-                await sportsRes.json();
+  const fetchAdminData = async () => {
+    setLoading(true);
+    setError("");
 
-              const entriesResult =
-                await entriesRes.json();
+    try {
+      const [
+        sportsRes,
+        entriesRes,
+        matchesRes,
+        liveRes,
+        pointRes,
+        controlsRes,
+        resultsRes,
+      ] = await Promise.all([
+        adminFetch(`${API_URL}/sports`),
+        adminFetch(`${API_URL}/entries`),
+        adminFetch(`${API_URL}/matches`),
+        adminFetch(`${API_URL}/matches/live`),
+        adminFetch(`${API_URL}/point-table`),
+        adminFetch(`${API_URL}/registration-controls`),
+        adminFetch(`${API_URL}/results`),
+      ]);
 
-              const matchesResult =
-                await matchesRes.json();
+      const sportsResult =
+        await sportsRes.json();
 
-              const liveResult =
-                await liveRes.json();
+      const entriesResult =
+        await entriesRes.json();
 
-              const pointsResult =
-                await pointRes.json();
+      const matchesResult =
+        await matchesRes.json();
 
-              const registrationResult =
-                await controlsRes.json();
+      const liveResult =
+        await liveRes.json();
 
-              const resultsResult =
-                await resultsRes.json();
+      const pointsResult =
+        await pointRes.json();
 
-              if (sportsResult.success) {
-                setSports(
-                  sportsResult.data || []
-                );
-              }
+      const registrationResult =
+        await controlsRes.json();
 
-              if (entriesResult.success) {
-                setEntries(
-                  entriesResult.data || []
-                );
-              }
+      const resultsResult =
+        await resultsRes.json();
 
-              if (matchesResult.success) {
-                setMatches(
-                  matchesResult.data || []
-                );
-              }
+      if (sportsResult.success) {
+        setSports(
+          sportsResult.data || []
+        );
+      }
 
-              if (liveResult.success) {
-                setLiveMatches(
-                  liveResult.data || []
-                );
-              }
+      if (entriesResult.success) {
+        setEntries(
+          entriesResult.data || []
+        );
+      }
 
-              if (pointsResult.success) {
-                setPointTable(
-                  pointsResult.data || []
-                );
-              }
+      if (matchesResult.success) {
+        setMatches(
+          matchesResult.data || []
+        );
+      }
 
-              if (registrationResult.success) {
-                setRegistrationControls(
-                  registrationResult.data || []
-                );
-              }
+      if (liveResult.success) {
+        setLiveMatches(
+          liveResult.data || []
+        );
+      }
 
-              if (resultsResult.success) {
-                setResults(
-                  resultsResult.data || []
-                );
-              }
-            } catch (err) {
-              console.error(
-                "Admin data error:",
-                err
-              );
+      if (pointsResult.success) {
+        setPointTable(
+          pointsResult.data || []
+        );
+      }
 
-              setError(
-                "Unable to connect to Sports backend. Make sure the backend is running."
-              );
-            } finally {
-              setLoading(false);
-            }
-          };
+      if (registrationResult.success) {
+        setRegistrationControls(
+          registrationResult.data || []
+        );
+      }
 
-          useEffect(() => {
-            if (isAuthenticated) {
-              fetchAdminData();
-            }
-          }, [isAuthenticated]);
+      if (resultsResult.success) {
+        setResults(
+          resultsResult.data || []
+        );
+      }
+    } catch (err) {
+      console.error(
+        "Admin data error:",
+        err
+      );
+
+      setError(
+        "Unable to connect to Sports backend. Make sure the backend is running."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchAdminData();
+    }
+  }, [isAuthenticated]);
           const downloadRegistrationsPDF = () => {
   if (!filteredRegistrations.length) {
     setError("No registrations available to download.");
@@ -778,7 +858,7 @@ const downloadDrawPDF = () => {
           new Date(deadline).toISOString();
       }
 
-      const response = await fetch(
+      const response = await adminFetch(
         `${API_URL}/categories/${categoryId}/registration/open`,
         {
           method: "POST",
@@ -821,7 +901,7 @@ const downloadDrawPDF = () => {
     setError("");
 
     try {
-      const response = await fetch(
+      const response = await adminFetch(
         `${API_URL}/categories/${categoryId}/registration/close`,
         {
           method: "POST",
@@ -858,7 +938,7 @@ const startMatch = async (matchId) => {
   setError("");
 
   try {
-    const response = await fetch(
+    const response = await adminFetch(
       `${API_URL}/matches/${matchId}/start`,
       {
         method: "POST",
@@ -899,7 +979,7 @@ const scheduleMatch = async (
   setError("");
 
   try {
-    const response = await fetch(
+    const response = await adminFetch(
       `${API_URL}/matches/${matchId}`,
       {
         method: "PATCH",
@@ -964,7 +1044,7 @@ const updateScore = async () => {
   setError("");
 
   try {
-    const response = await fetch(
+    const response = await adminFetch(
       `${API_URL}/matches/${selectedMatch.id}/score`,
       {
         method: "POST",
@@ -1043,7 +1123,7 @@ const updateScore = async () => {
     setError("");
 
     try {
-      const response = await fetch(
+      const response = await adminFetch(
         `${API_URL}/matches/${completeMatchData.id}/complete`,
         {
           method: "POST",
@@ -1138,7 +1218,7 @@ const updateScore = async () => {
     try {
       setDrawLoading(true);
 
-      const response = await fetch(
+      const response = await adminFetch(
         `${API_URL}/categories/${categoryId}/draw`
       );
 
@@ -1177,7 +1257,7 @@ const updateScore = async () => {
     }
 
     try {
-      const response = await fetch(
+      const response = await adminFetch(
         `${API_URL}/results?categoryId=${categoryId}&year=2026-27`
       );
 
@@ -1283,7 +1363,7 @@ const updateScore = async () => {
         selectedDrawCategoryObject?.name ||
         "Sports Draw";
 
-      const response = await fetch(
+      const response = await adminFetch(
         `${API_URL}/draws`,
         {
           method: "POST",
@@ -1361,7 +1441,7 @@ const updateScore = async () => {
     setDrawLoading(true);
 
     try {
-      const response = await fetch(
+      const response = await adminFetch(
         `${API_URL}/draws/${selectedDraw.id}/generate`,
         {
           method: "POST",
@@ -1448,7 +1528,7 @@ const lockDraw = async () => {
   setDrawLoading(true);
 
   try {
-    const response = await fetch(
+    const response = await adminFetch(
       `${API_URL}/draws/${selectedDraw.id}/lock`,
       {
         method: "POST",
@@ -1529,7 +1609,7 @@ const resetDraw = async () => {
   setDrawLoading(true);
 
   try {
-    const response = await fetch(
+    const response = await adminFetch(
       `${API_URL}/draws/${selectedDraw.id}/reset`,
       {
         method: "POST",
@@ -1743,10 +1823,7 @@ const resetDraw = async () => {
           </div>
 
           <button
-            onClick={() => {
-              setIsAuthenticated(false);
-              setActiveTab("dashboard");
-            }}
+            onClick={handleLogout}
             style={{
               padding: "11px 18px",
               background: "transparent",
@@ -3324,7 +3401,7 @@ const resetDraw = async () => {
   setMessage("");
 
   try {
-    const response = await fetch(
+    const response = await adminFetch(
       `${API_URL}/results/athletics`,
       {
         method: "POST",

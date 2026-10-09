@@ -1,12 +1,86 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 const { PrismaClient } = require("@prisma/client");
 const { PrismaPg } = require("@prisma/adapter-pg");
 const { Pool } = require("pg");
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// ============================================================
+// AUTHENTICATION CONFIG & MIDDLEWARE
+// ============================================================
+const JWT_SECRET = process.env.JWT_SECRET || "famt_arena_fallback_secret_key_2026";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "FamtArena@Admin2026";
+
+function requireAdmin(req, res, next) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({
+      success: false,
+      message: "Unauthorized: Admin authentication token required",
+    });
+  }
+
+  const token = authHeader.split(" ")[1];
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    if (decoded.role !== "admin") {
+      return res.status(403).json({
+        success: false,
+        message: "Forbidden: Admin privileges required",
+      });
+    }
+    req.admin = decoded;
+    next();
+  } catch (err) {
+    return res.status(401).json({
+      success: false,
+      message: "Unauthorized: Invalid or expired token",
+    });
+  }
+}
+
+// ============================================================
+// ADMIN AUTHENTICATION ENDPOINTS
+// ============================================================
+app.post("/api/admin/login", (req, res) => {
+  const { password } = req.body;
+  if (!password) {
+    return res.status(400).json({
+      success: false,
+      message: "Password is required",
+    });
+  }
+
+  if (password !== ADMIN_PASSWORD) {
+    return res.status(401).json({
+      success: false,
+      message: "Invalid admin password",
+    });
+  }
+
+  const token = jwt.sign({ role: "admin" }, JWT_SECRET, {
+    expiresIn: "12h",
+  });
+
+  return res.json({
+    success: true,
+    message: "Admin authentication successful",
+    token,
+  });
+});
+
+app.get("/api/admin/verify", requireAdmin, (req, res) => {
+  return res.json({
+    success: true,
+    message: "Admin session is valid",
+    admin: true,
+  });
+});
+
 // ============================================================
 // DATABASE
 // ============================================================
@@ -225,7 +299,7 @@ message: "Failed to fetch point table",
 });
 }
 });
-app.post("/api/point-table/initialize", async (req, res) => {
+app.post("/api/point-table/initialize", requireAdmin, async (req, res) => {
 try {
 const departments = await prisma.department.findMany();
 for (const department of departments) {
@@ -509,7 +583,7 @@ message: "Failed to fetch registration status",
 // ============================================================
 // ALL REGISTRATION CONTROLS - ADMIN
 // ============================================================
-app.get("/api/registration-controls", async (req, res) => {
+app.get("/api/registration-controls", requireAdmin, async (req, res) => {
 try {
 const categories = await prisma.sportCategory.findMany({
 include: {
@@ -545,6 +619,7 @@ message: "Failed to fetch registration controls",
 // ============================================================
 app.post(
 "/api/categories/:categoryId/registration/open",
+requireAdmin,
 async (req, res) => {
 try {
 const categoryId = Number(req.params.categoryId);
@@ -623,6 +698,7 @@ error: error.message,
 // ============================================================
 app.post(
 "/api/categories/:categoryId/registration/close",
+requireAdmin,
 async (req, res) => {
 try {
 const categoryId = Number(req.params.categoryId);
@@ -681,7 +757,7 @@ error: error.message,
 // ============================================================
 // PLAYERS
 // ============================================================
-app.get("/api/players", async (req, res) => {
+app.get("/api/players", requireAdmin, async (req, res) => {
 try {
 const players = await prisma.player.findMany({
 include: {
@@ -707,7 +783,7 @@ message: "Failed to fetch players",
 // ============================================================
 // SINGLE PLAYER
 // ============================================================
-app.get("/api/players/:playerId", async (req, res) => {
+app.get("/api/players/:playerId", requireAdmin, async (req, res) => {
 try {
 const playerId = Number(req.params.playerId);
 if (!Number.isInteger(playerId)) {
@@ -745,7 +821,7 @@ message: "Failed to fetch player",
 // ============================================================
 // CREATE PLAYER
 // ============================================================
-app.post("/api/players", async (req, res) => {
+app.post("/api/players", requireAdmin, async (req, res) => {
 try {
 const {
 name,
@@ -1364,7 +1440,7 @@ message:
 // ============================================================
 // ALL COMPETITION ENTRIES - ADMIN
 // ============================================================
-app.get("/api/entries", async (req, res) => {
+app.get("/api/entries", requireAdmin, async (req, res) => {
 try {
 const { categoryId, sportId, departmentId } = req.query;
 const where = {};
@@ -1452,6 +1528,7 @@ message:
 // ============================================================
 app.get(
 "/api/categories/:categoryId/entries",
+requireAdmin,
 async (req, res) => {
 try {
 const categoryId =
@@ -1506,7 +1583,7 @@ message:
 // ============================================================
 // SINGLE ENTRY
 // ============================================================
-app.get("/api/entries/:entryId", async (req, res) => {
+app.get("/api/entries/:entryId", requireAdmin, async (req, res) => {
 try {
 const entryId =
 Number(req.params.entryId);
@@ -1562,7 +1639,7 @@ message:
 // ============================================================
 // DELETE COMPETITION ENTRY - ADMIN
 // ============================================================
-app.delete("/api/entries/:entryId", async (req, res) => {
+app.delete("/api/entries/:entryId", requireAdmin, async (req, res) => {
 try {
 const entryId = Number(req.params.entryId);
 if (!Number.isInteger(entryId)) {
@@ -1872,7 +1949,7 @@ message:
 // ============================================================
 // CREATE MATCH
 // ============================================================
-app.post("/api/matches", async (req, res) => {
+app.post("/api/matches", requireAdmin, async (req, res) => {
 try {
 const {
 sportId,
@@ -1933,7 +2010,7 @@ error: error.message,
 // ============================================================
 // UPDATE MATCH
 // ============================================================
-app.patch("/api/matches/:matchId", async (req, res) => {
+app.patch("/api/matches/:matchId", requireAdmin, async (req, res) => {
 try {
 const matchId =
 Number(req.params.matchId);
@@ -2067,6 +2144,7 @@ message:
 // ============================================================
 app.post(
 "/api/matches/:matchId/start",
+requireAdmin,
 async (req, res) => {
 try {
 const matchId =
@@ -2165,6 +2243,7 @@ message:
 // ============================================================
 app.post(
 "/api/matches/:matchId/score",
+requireAdmin,
 async (req, res) => {
 try {
 const matchId =
@@ -2290,6 +2369,7 @@ message:
 // ============================================================
 app.post(
 "/api/matches/:matchId/complete",
+requireAdmin,
 async (req, res) => {
 try {
 const matchId = Number(req.params.matchId);
@@ -3013,6 +3093,7 @@ nextMatch: true,
 // ============================================================
 app.post(
 "/api/draws",
+requireAdmin,
 async (req, res) => {
 try {
 const {
@@ -3274,6 +3355,7 @@ error.message,
 // ============================================================
 app.post(
 "/api/draws/:drawId/generate",
+requireAdmin,
 async (req, res) => {
 try {
 const drawId =
@@ -3870,6 +3952,7 @@ error.message,
 //
 app.post(
 "/api/draws/:drawId/reset",
+requireAdmin,
 async (req, res) => {
 try {
 const drawId =
@@ -3983,6 +4066,7 @@ error.message,
 // ============================================================
 app.post(
 "/api/draws/:drawId/lock",
+requireAdmin,
 async (req, res) => {
 try {
 const drawId =
@@ -4112,7 +4196,7 @@ error: error.message,
 // ATHLETICS - SAVE / UPDATE ALL 3 POSITIONS
 // Admin can manipulate Athletics results anytime
 // ======================================================
-app.post("/api/results/athletics", async (req, res) => {
+app.post("/api/results/athletics", requireAdmin, async (req, res) => {
 try {
 const {
 categoryId,
@@ -4319,6 +4403,7 @@ ADMIN CAN DELETE ANY RESULT AT ANY TIME
 ============================================================ */
 app.delete(
 "/api/results/:resultId",
+requireAdmin,
 async (req, res) => {
 try {
 const resultId = Number(
@@ -4380,6 +4465,7 @@ ADMIN CAN RESET RESULTS AT ANY TIME
 ============================================================ */
 app.delete(
 "/api/results/category/:categoryId",
+requireAdmin,
 async (req, res) => {
 try {
 const categoryId = Number(
@@ -4446,7 +4532,7 @@ error: error.message,
 // ADMIN - EDIT COMPETITION RESULT POINTS
 // ============================================================
 
-app.patch("/api/results/:resultId", async (req, res) => {
+app.patch("/api/results/:resultId", requireAdmin, async (req, res) => {
   try {
     const resultId = Number(req.params.resultId);
     const pointsAwarded = Number(req.body.pointsAwarded);
@@ -4517,7 +4603,7 @@ app.patch("/api/results/:resultId", async (req, res) => {
 // ADMIN - EDIT CATEGORY PODIUM / WINNERS
 // ============================================================
 
-app.patch("/api/results/category/:categoryId/podium", async (req, res) => {
+app.patch("/api/results/category/:categoryId/podium", requireAdmin, async (req, res) => {
   try {
     const categoryId = Number(req.params.categoryId);
     const firstEntryId = Number(req.body.firstEntryId);

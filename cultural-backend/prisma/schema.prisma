@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// =====================================================
+// CULTURAL COMMITTEES
+// =====================================================
+model CulturalCommittee {
+  id          String   @id
+  name        String   @unique
+  category    String
+  description String?
+  icon        String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  registrations CulturalRegistration[]
+}
+
+// =====================================================
+// CULTURAL POSITIONS
+// =====================================================
+model CulturalPosition {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  isActive  Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  registrations CulturalRegistration[]
+}
+
+// =====================================================
+// CULTURAL REGISTRATIONS
+// =====================================================
+model CulturalRegistration {
+  id            Int                @id @default(autoincrement())
+  fullName      String
+  department    String
+  studentYear   String
+  committeeId   String
+  positionId    Int?
+  positionName  String
+  contactNumber String
+  email         String
+  status        RegistrationStatus @default(PENDING)
+  notes         String?
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+
+  committee CulturalCommittee  @relation(fields: [committeeId], references: [id])
+  position  CulturalPosition?  @relation(fields: [positionId], references: [id], onDelete: SetNull)
+
+  @@index([committeeId])
+  @@index([department])
+  @@index([status])
+}
+
+// =====================================================
+// CULTURAL ADMIN USERS
+// =====================================================
+model CulturalAdminUser {
+  id           Int      @id @default(autoincrement())
+  username     String   @unique
+  passwordHash String
+  name         String?
+  role         String   @default("CULTURAL_ADMIN")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+enum RegistrationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
