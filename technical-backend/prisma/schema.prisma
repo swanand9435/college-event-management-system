@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// =====================================================
+// MAJOR TECHNICAL EVENTS
+// Exactly three: Stabilia, BrainByte, Kalakruti
+// =====================================================
+model MajorEvent {
+  id                 String   @id // "stabilia", "brainbyte", "kalakruti"
+  name               String   @unique
+  tagline            String?
+  description        String?
+  icon               String?
+  category           String?
+  isRegistrationOpen Boolean  @default(true)
+  isActive           Boolean  @default(true)
+  order              Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  competitions  Competition[]
+  registrations TechnicalRegistration[]
+}
+
+// =====================================================
+// SUBEVENTS / COMPETITIONS
+// Exactly the 12 Kalakruti competitions
+// =====================================================
+model Competition {
+  id                 String   @id // slug e.g. "reel-short-making"
+  majorEventId       String
+  name               String
+  description        String?
+  rules              String?
+  icon               String?
+  isRegistrationOpen Boolean  @default(true)
+  isActive           Boolean  @default(true)
+  order              Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  majorEvent    MajorEvent              @relation(fields: [majorEventId], references: [id], onDelete: Cascade)
+  registrations TechnicalRegistration[]
+
+  @@index([majorEventId])
+}
+
+// =====================================================
+// DYNAMIC TECHNICAL POSITIONS
+// Configurable by Technical Admin (Participant, Head / Co-Head, etc.)
+// =====================================================
+model TechnicalPosition {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  isActive  Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  registrations TechnicalRegistration[]
+}
+
+// =====================================================
+// TECHNICAL REGISTRATIONS
+// =====================================================
+model TechnicalRegistration {
+  id               Int                @id @default(autoincrement())
+  registrationCode String             @unique
+  fullName         String
+  institution      String             // School / College Name
+  yearStandard     String             // Year / Standard
+  department       String             // Department or "General / Not Applicable"
+  contactNumber    String
+  email            String
+  majorEventId     String
+  competitionId    String?
+  positionId       Int?
+  positionName     String             // Historical snapshot
+  status           RegistrationStatus @default(PENDING)
+  notes            String?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+
+  majorEvent  MajorEvent         @relation(fields: [majorEventId], references: [id])
+  competition Competition?       @relation(fields: [competitionId], references: [id], onDelete: SetNull)
+  position    TechnicalPosition? @relation(fields: [positionId], references: [id], onDelete: SetNull)
+
+  @@index([majorEventId])
+  @@index([competitionId])
+  @@index([status])
+}
+
+// =====================================================
+// TECHNICAL ADMIN USER
+// =====================================================
+model TechnicalAdminUser {
+  id           Int      @id @default(autoincrement())
+  username     String   @unique
+  passwordHash String
+  name         String?
+  role         String   @default("TECHNICAL_ADMIN")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+enum RegistrationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CONFIRMED
+  CANCELLED
+}

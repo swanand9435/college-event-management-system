@@ -11,11 +11,11 @@ import Sports from './pages/Sports'
 import SportsRegistration from './pages/SportsRegistration'
 
 // ==========================================
-// TECHNICAL SECTION
+// TECHNICAL SECTION (NEW REBUILT MODULE)
 // ==========================================
-import Home from './pages/Home'
-import Events from './pages/Events'
-import EventDetail from './pages/EventDetail'
+import Technical from './pages/Technical'
+import TechnicalRegistration from './pages/TechnicalRegistration'
+import TechnicalAdmin from './pages/TechnicalAdmin'
 
 // ==========================================
 // CULTURAL / UTOPIA
@@ -159,22 +159,48 @@ export default function App() {
 
 
           {/* =====================================
-              TECHNICAL SECTION
+              TECHNICAL SECTION (REBUILT MODULE)
               ===================================== */}
 
           <Route
             path="/technical"
-            element={<Home />}
+            element={<Technical />}
           />
 
           <Route
+            path="/technical/admin"
+            element={<TechnicalAdmin />}
+          />
+
+          <Route
+            path="/technical/stabilia"
+            element={<TechnicalRegistration />}
+          />
+
+          <Route
+            path="/technical/brainbyte"
+            element={<TechnicalRegistration />}
+          />
+
+          <Route
+            path="/technical/kalakruti/:competitionSlug"
+            element={<TechnicalRegistration />}
+          />
+
+          <Route
+            path="/technical/register/:eventSlug"
+            element={<TechnicalRegistration />}
+          />
+
+          {/* Compatibility routes */}
+          <Route
             path="/events"
-            element={<Events />}
+            element={<Technical />}
           />
 
           <Route
             path="/events/:id"
-            element={<EventDetail />}
+            element={<TechnicalRegistration />}
           />
 
 

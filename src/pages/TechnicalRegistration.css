@@ -1,0 +1,375 @@
+/* =========================================================
+   TECHNICAL REGISTRATION PAGE - CYBERPUNK THEME
+   ========================================================= */
+
+.tech-reg-page {
+  min-height: 100vh;
+  background: #030712;
+  color: #f8fafc;
+  font-family: inherit;
+  position: relative;
+  overflow-x: hidden;
+  padding-bottom: 80px;
+}
+
+.tech-reg-glow {
+  position: absolute;
+  top: -120px;
+  right: -100px;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.25) 0%, rgba(3, 7, 18, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tech-reg-glow-two {
+  position: absolute;
+  bottom: 10%;
+  left: -150px;
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, rgba(3, 7, 18, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Nav */
+.tech-reg-nav {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 36px;
+  max-width: 1350px;
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(14, 165, 233, 0.12);
+}
+
+.tech-reg-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.tech-reg-brand strong {
+  font-size: 1.15rem;
+  letter-spacing: 2px;
+  font-weight: 900;
+}
+
+.tech-reg-brand span {
+  font-size: 0.8rem;
+  color: #38bdf8;
+  letter-spacing: 1.5px;
+}
+
+.tech-reg-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.tech-reg-back:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Container */
+.tech-reg-container {
+  position: relative;
+  z-index: 10;
+  max-width: 880px;
+  margin: 45px auto 0;
+  padding: 0 24px;
+}
+
+/* Header */
+.tech-reg-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.tech-reg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(14, 165, 233, 0.12);
+  border: 1px solid rgba(14, 165, 233, 0.35);
+  border-radius: 50px;
+  color: #38bdf8;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.tech-reg-title {
+  font-size: clamp(2.3rem, 5vw, 3.6rem);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+}
+
+.tech-reg-title span {
+  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tech-reg-subtitle {
+  font-size: 1rem;
+  color: #94a3b8;
+  max-width: 620px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Form Card */
+.tech-reg-card {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(14, 165, 233, 0.2);
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.tech-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.tech-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tech-form-group.full-width {
+  grid-column: span 2;
+}
+
+.tech-form-label {
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #cbd5e1;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tech-form-label span.req {
+  color: #38bdf8;
+}
+
+.tech-form-input,
+.tech-form-select {
+  width: 100%;
+  padding: 13px 16px;
+  background: rgba(3, 7, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  outline: none;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.tech-form-input:focus,
+.tech-form-select:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+  background: rgba(8, 17, 34, 0.95);
+}
+
+.tech-form-select option {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.tech-form-error {
+  font-size: 0.75rem;
+  color: #f87171;
+}
+
+/* Alert */
+.tech-alert {
+  padding: 14px 18px;
+  border-radius: 6px;
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tech-alert.error {
+  background: rgba(220, 38, 38, 0.15);
+  border: 1px solid rgba(220, 38, 38, 0.4);
+  color: #fca5a5;
+}
+
+.tech-alert.closed {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #fcd34d;
+}
+
+/* Submit */
+.tech-submit-btn {
+  width: 100%;
+  margin-top: 28px;
+  padding: 16px;
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.tech-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 12px 30px rgba(2, 132, 199, 0.5);
+}
+
+.tech-submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Success Card */
+.tech-success-card {
+  text-align: center;
+  padding: 50px 30px;
+}
+
+.tech-success-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(14, 165, 233, 0.15);
+  border: 2px solid #38bdf8;
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  margin: 0 auto 24px;
+}
+
+.tech-success-code {
+  display: inline-block;
+  padding: 8px 18px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px dashed #38bdf8;
+  border-radius: 6px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #38bdf8;
+  margin-bottom: 24px;
+}
+
+.tech-success-details {
+  max-width: 520px;
+  margin: 0 auto 32px;
+  background: rgba(3, 7, 18, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: left;
+}
+
+.tech-success-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.9rem;
+}
+
+.tech-success-row:last-child {
+  border-bottom: none;
+}
+
+.tech-success-row span {
+  color: #94a3b8;
+}
+
+.tech-success-row strong {
+  color: #ffffff;
+}
+
+.tech-success-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.tech-btn-secondary {
+  padding: 12px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+  color: #ffffff;
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tech-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 768px) {
+  .tech-reg-nav {
+    padding: 16px 20px;
+  }
+  .tech-reg-card {
+    padding: 28px 20px;
+  }
+  .tech-form-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .tech-form-group.full-width {
+    grid-column: span 1;
+  }
+}
